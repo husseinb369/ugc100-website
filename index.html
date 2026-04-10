@@ -15,10 +15,10 @@
   @font-face { font-family: 'Geist'; src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
 
   :root {
-    --bg: #ffffff;
-    --bg-1: #f5f5f5;
-    --bg-2: #ebebeb;
-    --bg-3: #e0e0e0;
+    --bg: #f7f7f7;
+    --bg-1: #efefef;
+    --bg-2: #e5e5e5;
+    --bg-3: #dadada;
     --white: #000000;
     --gray: #6b6b6b;
     --gray-dim: rgba(0,0,0,0.4);
@@ -48,6 +48,13 @@
 
   body {
     background: var(--bg);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 10% 15%, rgba(61,153,38,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 50% at 90% 40%, rgba(29,200,120,0.05) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 50% at 50% 75%, rgba(61,153,38,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 80% 90%, rgba(29,200,120,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 20% 60%, rgba(61,153,38,0.03) 0%, transparent 50%);
+    background-attachment: fixed;
     color: var(--gray);
     font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 16px;
@@ -65,11 +72,10 @@
   /* Chameleon watermark */
   .chameleon-wm {
     position: absolute;
-    opacity: 0.07;
+    opacity: 0.09;
     pointer-events: none;
     z-index: 0;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+    filter: saturate(2) contrast(1.2);
   }
 
   /* ===== NAV ===== */
@@ -153,14 +159,10 @@
   }
   .hero h1 .highlight {
     display: inline;
-    padding: 0 12px;
+    padding: 2px 14px;
     border-radius: 8px;
-    background: rgba(61,153,38,0.15);
+    background: linear-gradient(135deg, rgba(61,153,38,0.15), rgba(29,200,120,0.12));
     color: var(--accent);
-    text-decoration: underline;
-    text-decoration-color: rgba(61,153,38,0.3);
-    text-underline-offset: 6px;
-    text-decoration-thickness: 3px;
   }
   .hero .subtitle {
     font-size: 18px;
@@ -554,13 +556,21 @@
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 120px;
-    background: linear-gradient(to top, #ffffff, transparent);
+    background: linear-gradient(to top, #f7f7f7, transparent);
     z-index: 6;
     pointer-events: none;
   }
 
   /* ===== SECTIONS ===== */
   section { padding: 160px 0 0; position: relative; }
+  section:nth-of-type(even)::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, rgba(61,153,38,0.02) 0%, transparent 40%, transparent 60%, rgba(29,200,120,0.015) 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
   .section-label {
     display: flex;
     flex-direction: column;
@@ -660,7 +670,8 @@
   .usp-visual { background: var(--bg-1); display: flex; align-items: center; justify-content: center; padding: 48px; min-height: 400px; overflow: hidden; }
   .ai-gen-visual { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 300px; }
   .ai-gen-card { border: 1px solid var(--border); border-radius: var(--r-sm); padding: 16px; display: flex; gap: 12px; align-items: center; background: rgba(0,0,0,0.3); }
-  .ai-gen-thumb { width: 48px; height: 64px; border-radius: 8px; background: linear-gradient(135deg, var(--accent-dim), var(--bg-2)); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+  .ai-gen-thumb { width: 48px; height: 64px; border-radius: 8px; background: linear-gradient(135deg, var(--accent-dim), var(--bg-2)); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; overflow: hidden; }
+  .ai-gen-thumb img { width: 100%; height: 100%; object-fit: cover; }
   .ai-gen-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
   .ai-gen-info .title { font-size: 13px; font-weight: 500; color: var(--white); }
   .ai-gen-info .meta { font-size: 11px; color: var(--gray); }
@@ -1047,8 +1058,8 @@
           <!-- 3 stat boxes -->
           <div class="mock-stat-row">
             <div class="mock-stat-box">
-              <span class="stat-title">Total Views</span>
-              <div class="stat-row"><span class="stat-value">15.2M</span><span class="stat-change">+24%</span></div>
+              <span class="stat-title">Videos Created</span>
+              <div class="stat-row"><span class="stat-value">328</span><span class="stat-change">+18%</span></div>
             </div>
             <div class="mock-stat-box">
               <span class="stat-title">Active Accounts</span>
@@ -1102,12 +1113,12 @@
             <!-- Accounts -->
             <div class="mock-clients-card">
               <span class="clients-title">Top Accounts</span>
-              <div class="mock-client-row"><span class="mock-client-name">@travl.vibes</span><span class="mock-client-views">1.2M</span></div>
-              <div class="mock-client-row"><span class="mock-client-name">@sunset.escapes</span><span class="mock-client-views">843K</span></div>
-              <div class="mock-client-row"><span class="mock-client-name">@helena.travels</span><span class="mock-client-views">621K</span></div>
-              <div class="mock-client-row"><span class="mock-client-name">@citywalks.daily</span><span class="mock-client-views">504K</span></div>
-              <div class="mock-client-row"><span class="mock-client-name">@beach.moments</span><span class="mock-client-views">387K</span></div>
-              <div class="mock-client-row"><span class="mock-client-name">@rooftop.views</span><span class="mock-client-views">291K</span></div>
+              <div class="mock-client-row"><span class="mock-client-name">@gaming</span><span class="mock-client-views">10.2M</span></div>
+              <div class="mock-client-row"><span class="mock-client-name">@gamelancer</span><span class="mock-client-views">4.9M</span></div>
+              <div class="mock-client-row"><span class="mock-client-name">@travel</span><span class="mock-client-views">1.1M</span></div>
+              <div class="mock-client-row"><span class="mock-client-name">@callofdutygamelancer</span><span class="mock-client-views">1.3M</span></div>
+              <div class="mock-client-row"><span class="mock-client-name">@hotels</span><span class="mock-client-views">892K</span></div>
+              <div class="mock-client-row"><span class="mock-client-name">@vacation</span><span class="mock-client-views">743K</span></div>
             </div>
           </div>
         </div>
@@ -1117,65 +1128,88 @@
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
+<!-- WHY UGC100 -->
+<section id="case-study">
+  <img src="logo.png" class="chameleon-wm" alt="" style="width:450px;height:450px;top:80px;right:-100px;">
+  <div class="container">
+    <div class="section-label">
+      <div class="badge"><span class="dot"></span> Why UGC100</div>
+      <h2>$4.77 per video vs $200 at an agency</h2>
+      <p>You do the math.</p>
+    </div>
+    <div class="comparison-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr><th style="text-align:left"></th><th>Traditional Agency</th><th>Freelancer</th><th class="col-accent">UGC100</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Cost per video</td><td class="dim">$150 &mdash; $250</td><td class="dim">$50 &mdash; $100</td><td class="accent-val">from $4.77</td></tr>
+          <tr><td>600 videos/mo</td><td class="dim">$90,000 &mdash; $150,000</td><td class="dim">$30,000 &mdash; $60,000</td><td class="accent-val">$4,400/mo</td></tr>
+          <tr><td>1,500 videos/mo</td><td class="dim">$225,000 &mdash; $375,000</td><td class="dim">$75,000 &mdash; $150,000</td><td class="accent-val">$8,900/mo</td></tr>
+          <tr><td>3,000 videos/mo</td><td class="dim-italic">not possible</td><td class="dim-italic">not possible</td><td class="accent-val">$14,300/mo</td></tr>
+          <tr><td>Delivery time</td><td class="dim">2&ndash;4 weeks</td><td class="dim">1&ndash;2 weeks</td><td class="accent-val">up to 24h</td></tr>
+          <tr><td>Editing included</td><td class="dim">&#10005;</td><td class="dim">&#10005;</td><td class="accent-val">&#10003;</td></tr>
+          <tr><td>Posting included</td><td class="dim">&#10005;</td><td class="dim">&#10005;</td><td class="accent-val">&#10003;</td></tr>
+          <tr><td>Scales automatically</td><td class="dim">&#10005;</td><td class="dim">&#10005;</td><td class="accent-val">&#10003;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- OUR PIPELINE -->
 <section>
-  <!-- Chameleon watermark -->
   <img src="logo.png" class="chameleon-wm" alt="" style="width:400px;height:400px;top:0;left:-120px;">
   <div class="container">
     <div class="section-label">
-      <div class="badge"><span class="dot"></span> How it works</div>
-      <h2>We make UGC accessible and actionable for teams of all sizes</h2>
-      <p>No complex setup or technical expertise required. Sign up, connect your data, and start discovering valuable insights right away.</p>
+      <div class="badge"><span class="dot"></span> Our Pipeline</div>
+      <h2>How our system works</h2>
+      <p>From script to screen in one automated flow. No manual work, no bottlenecks.</p>
     </div>
     <div class="value-grid">
       <div class="value-card">
         <div class="value-text">
-          <h3>Up and running in minutes. Connect your accounts, set your brand, start creating.</h3>
+          <h3>1. AI generates your UGC videos</h3>
+          <p>Pick a persona, enter your hook, and our AI creates authentic UGC-style videos in minutes. No creators, no shoots.</p>
         </div>
         <div class="value-visual">
           <div class="onboarding-steps">
-            <div class="onboard-step done"><span class="step-icon">&#10003;</span> Registration complete</div>
-            <div class="onboard-step done"><span class="step-icon">&#10003;</span> Fill in the details</div>
-            <div class="onboard-step active"><span class="step-icon">3</span> Up and running!</div>
+            <div class="onboard-step done"><span class="step-icon">&#10003;</span> Hook generated</div>
+            <div class="onboard-step done"><span class="step-icon">&#10003;</span> Persona selected</div>
+            <div class="onboard-step active"><span class="step-icon">&#9889;</span> Video rendering...</div>
           </div>
         </div>
       </div>
       <div class="value-card">
         <div class="value-text">
-          <h3>Create it, until you make it. Shape UGC100 to match what you actually need and how your brand looks.</h3>
+          <h3>2. Your team edits & approves</h3>
+          <p>Content flows through your pipeline. Editors review, VAs organize, managers approve. Everyone sees only what they need.</p>
         </div>
         <div class="value-visual">
-          <div class="custom-preview">
-            <div class="color-row">
-              <div class="color-dot active" style="background:#3d9926"></div>
-              <div class="color-dot" style="background:#3b82f6"></div>
-              <div class="color-dot" style="background:#f43f5e"></div>
-              <div class="color-dot" style="background:#ffdf7d"></div>
-              <div class="color-dot" style="background:#8b5cf6"></div>
+          <div class="pipeline-visual" style="max-width:240px">
+            <div class="pipeline-col">
+              <div class="pipeline-col-header pending">Review</div>
+              <div class="pipeline-card"><span class="p-title">Skincare Haul</span><span class="p-meta">Editor: Sarah</span></div>
             </div>
-            <div class="font-row"><span>Geist</span><span>Brand font</span></div>
-            <div class="mini-preview-box">
-              <div class="bar-placeholder accent" style="width:30%"></div>
-              <div class="bar-placeholder" style="width:100%"></div>
-              <div class="bar-placeholder" style="width:85%"></div>
-              <div class="bar-placeholder short"></div>
+            <div class="pipeline-col">
+              <div class="pipeline-col-header ready">Approved</div>
+              <div class="pipeline-card"><span class="p-title">Coffee Review</span><span class="p-meta">Ready to post</span></div>
+              <div class="pipeline-card"><span class="p-title">Gym Motivation</span><span class="p-meta">Ready to post</span></div>
             </div>
           </div>
         </div>
       </div>
       <div class="value-card">
         <div class="value-text">
-          <h3>Reach a product expert in minutes, not a chatbot. 3-minute average response time with solutions on the first contact.</h3>
+          <h3>3. Auto-posted to all accounts</h3>
+          <p>Scheduled and published automatically to TikTok and Instagram. 107 accounts, zero manual posting.</p>
         </div>
         <div class="value-visual">
-          <div class="chat-visual">
-            <div class="chat-meta">UGC100 Support</div>
-            <div class="chat-msg support">Hi team, how can I help you today?</div>
-            <div class="chat-meta right">You</div>
-            <div class="chat-msg user">Hi, could you please help me connecting my accounts?</div>
-            <div class="chat-msg support">Sure thing! Could you please send us your ID so we can look into it.</div>
-            <div class="chat-msg user">My user ID is 12345678</div>
-            <div class="typing-dots"><span></span><span></span><span></span></div>
+          <div class="onboarding-steps">
+            <div class="onboard-step done"><span class="step-icon">&#10003;</span> @travl.vibes &middot; posted</div>
+            <div class="onboard-step done"><span class="step-icon">&#10003;</span> @sunset.escapes &middot; posted</div>
+            <div class="onboard-step done"><span class="step-icon">&#10003;</span> @helena.travels &middot; posted</div>
+            <div class="onboard-step active"><span class="step-icon">&#8635;</span> 104 more scheduled</div>
           </div>
         </div>
       </div>
@@ -1197,7 +1231,7 @@
       <div class="usp-visual">
         <div class="ai-gen-visual">
           <div class="ai-gen-card">
-            <div class="ai-gen-thumb">&#9889;</div>
+            <div class="ai-gen-thumb"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero10.webp" alt=""></div>
             <div class="ai-gen-info">
               <span class="title">Summer Skincare Routine</span>
               <span class="meta">Persona: Sophia &middot; 0:42</span>
@@ -1205,7 +1239,7 @@
             </div>
           </div>
           <div class="ai-gen-card">
-            <div class="ai-gen-thumb">&#127916;</div>
+            <div class="ai-gen-thumb"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero4.webp" alt=""></div>
             <div class="ai-gen-info">
               <span class="title">Morning Coffee Review</span>
               <span class="meta">Persona: Marcus &middot; 0:38</span>
@@ -1213,7 +1247,7 @@
             </div>
           </div>
           <div class="ai-gen-card">
-            <div class="ai-gen-thumb">&#10024;</div>
+            <div class="ai-gen-thumb"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero2.webp" alt=""></div>
             <div class="ai-gen-info">
               <span class="title">Fitness Equipment Unboxing</span>
               <span class="meta">Persona: Jade &middot; 0:55</span>
@@ -1253,35 +1287,6 @@
   </div>
 </section>
 
-
-<!-- WHY UGC100 -->
-<section id="case-study">
-  <img src="logo.png" class="chameleon-wm" alt="" style="width:450px;height:450px;top:80px;right:-100px;">
-  <div class="container">
-    <div class="section-label">
-      <div class="badge"><span class="dot"></span> Why UGC100</div>
-      <h2>$4.77 per video vs $200 at an agency</h2>
-      <p>You do the math.</p>
-    </div>
-    <div class="comparison-wrapper">
-      <table class="comparison-table">
-        <thead>
-          <tr><th style="text-align:left"></th><th>Traditional Agency</th><th>Freelancer</th><th class="col-accent">UGC100</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Cost per video</td><td class="dim">$150 &mdash; $250</td><td class="dim">$50 &mdash; $100</td><td class="accent-val">from $4.77</td></tr>
-          <tr><td>600 videos/mo</td><td class="dim">$90,000 &mdash; $150,000</td><td class="dim">$30,000 &mdash; $60,000</td><td class="accent-val">$4,400/mo</td></tr>
-          <tr><td>1,500 videos/mo</td><td class="dim">$225,000 &mdash; $375,000</td><td class="dim">$75,000 &mdash; $150,000</td><td class="accent-val">$8,900/mo</td></tr>
-          <tr><td>3,000 videos/mo</td><td class="dim-italic">not possible</td><td class="dim-italic">not possible</td><td class="accent-val">$14,300/mo</td></tr>
-          <tr><td>Delivery time</td><td class="dim">2&ndash;4 weeks</td><td class="dim">1&ndash;2 weeks</td><td class="accent-val">up to 24h</td></tr>
-          <tr><td>Editing included</td><td class="dim">&#10005;</td><td class="dim">&#10005;</td><td class="accent-val">&#10003;</td></tr>
-          <tr><td>Posting included</td><td class="dim">&#10005;</td><td class="dim">&#10005;</td><td class="accent-val">&#10003;</td></tr>
-          <tr><td>Scales automatically</td><td class="dim">&#10005;</td><td class="dim">&#10005;</td><td class="accent-val">&#10003;</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
 
 <!-- AI SECTION + TICKER -->
 <section class="ai-section">
@@ -1587,7 +1592,7 @@
     </div>
     <div class="blog-grid">
       <a href="#" class="blog-card">
-        <div class="blog-image"><div class="blog-image-inner">&#128200;</div></div>
+        <div class="blog-image"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero8.webp" alt="UGC creator" style="width:100%;height:100%;object-fit:cover;display:block"></div>
         <div class="blog-body">
           <span class="blog-category">Growth Strategy</span>
           <h3>How to set rates that reflect your true value</h3>
@@ -1595,7 +1600,7 @@
         </div>
       </a>
       <a href="#" class="blog-card">
-        <div class="blog-image"><div class="blog-image-inner">&#129302;</div></div>
+        <div class="blog-image"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero10.webp" alt="Skincare UGC" style="width:100%;height:100%;object-fit:cover;display:block"></div>
         <div class="blog-body">
           <span class="blog-category">Product Innovation</span>
           <h3>Navigating the feast-or-famine cycle in content creation</h3>
@@ -1603,7 +1608,7 @@
         </div>
       </a>
       <a href="#" class="blog-card">
-        <div class="blog-image"><div class="blog-image-inner">&#127919;</div></div>
+        <div class="blog-image"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero1.webp" alt="Lifestyle UGC" style="width:100%;height:100%;object-fit:cover;display:block"></div>
         <div class="blog-body">
           <span class="blog-category">Success Stories</span>
           <h3>Creating a content pipeline that saves time and builds trust</h3>
