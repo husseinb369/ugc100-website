@@ -1184,8 +1184,14 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 
-    /* Watermarks on mobile */
-    .chameleon-wm { display: none !important; }
+    /* Watermarks on mobile - scale down and keep inside viewport */
+    .chameleon-wm {
+      max-width: 180px !important;
+      max-height: 180px !important;
+      left: auto !important;
+      right: -20px !important;
+      transform: none !important;
+    }
 
     /* Logo ticker */
     .logo-ticker { gap: 24px; padding: 24px 0; }
