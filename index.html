@@ -698,6 +698,113 @@
   .scale-stat .num { font-size: 48px; font-weight: 500; color: var(--white); letter-spacing: -2px; line-height: 1; }
   .scale-stat .lbl { font-size: 14px; color: var(--gray); }
 
+  /* ===== UGC SLIDER ===== */
+  .ugc-slider-wrap {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    padding: 0 0 20px;
+  }
+  .ugc-slider-wrap::before,
+  .ugc-slider-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .ugc-slider-wrap::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+  .ugc-slider-wrap::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+  .ugc-slider {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 40px;
+    scrollbar-width: none;
+    cursor: grab;
+  }
+  .ugc-slider::-webkit-scrollbar { display: none; }
+  .ugc-slider:active { cursor: grabbing; }
+  .ugc-slide {
+    flex-shrink: 0;
+    width: 220px;
+    scroll-snap-align: start;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 9/16;
+    background: var(--bg-1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+  }
+  .ugc-slide:hover { transform: translateY(-4px); }
+  .ugc-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .ugc-slide-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 40px 14px 14px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .ugc-slide-handle {
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .ugc-slide-views {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+  }
+  .ugc-slide-play {
+    position: absolute;
+    bottom: 14px; left: 14px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+  }
+  .ugc-slide-play::after {
+    content: '';
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 5px 0 5px 9px;
+    border-color: transparent transparent transparent #fff;
+    margin-left: 2px;
+  }
+  .ugc-slide-sound {
+    position: absolute;
+    bottom: 14px; right: 14px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #fff;
+    z-index: 3;
+  }
+  @media (max-width: 640px) {
+    .ugc-slide { width: 160px; }
+    .ugc-slider { gap: 12px; padding: 0 20px; }
+  }
+
   /* ===== PIPELINE MOCKUP ===== */
   .pipe-mockup {
     border: 1px solid rgba(255,255,255,0.1);
@@ -1425,6 +1532,29 @@
 </section>
 
 
+<!-- UGC VIDEO SLIDER -->
+<section>
+  <div class="container">
+    <div class="section-label">
+      <div class="badge"><span class="dot"></span> Generated with UGC100</div>
+      <h2>Real content. Made by AI.</h2>
+    </div>
+  </div>
+  <div class="ugc-slider-wrap">
+    <div class="ugc-slider">
+      <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero1.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div></div>
+      <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero2.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div></div>
+      <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero4.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div></div>
+      <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero7.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div></div>
+      <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero8.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div></div>
+      <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero9.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div></div>
+      <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero10.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div></div>
+      <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero12.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div></div>
+      <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero13.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- USP: AI GENERATION -->
 <section id="features">
   <div class="container">
@@ -1944,6 +2074,16 @@
 </footer>
 
 <script>
+// Drag to scroll for slider
+const slider = document.querySelector('.ugc-slider');
+if (slider) {
+  let isDown = false, startX, scrollLeft;
+  slider.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
+  slider.addEventListener('mouseleave', () => isDown = false);
+  slider.addEventListener('mouseup', () => isDown = false);
+  slider.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); slider.scrollLeft = scrollLeft - (e.pageX - slider.offsetLeft - startX) * 1.5; });
+}
+
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
   const answer = item.querySelector('.faq-answer');
