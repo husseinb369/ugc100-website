@@ -50,12 +50,14 @@
   body {
     background: var(--bg);
     background-image:
-      radial-gradient(ellipse 80% 50% at 5% 10%, rgba(61,153,38,0.12) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 50% at 95% 25%, rgba(29,200,120,0.09) 0%, transparent 50%),
-      radial-gradient(ellipse 50% 40% at 70% 50%, rgba(52,211,153,0.07) 0%, transparent 50%),
-      radial-gradient(ellipse 70% 50% at 30% 70%, rgba(61,153,38,0.08) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 40% at 85% 80%, rgba(16,185,129,0.1) 0%, transparent 50%),
-      radial-gradient(ellipse 50% 30% at 15% 90%, rgba(29,200,120,0.06) 0%, transparent 50%);
+      radial-gradient(ellipse 80% 50% at 5% 8%, rgba(61,153,38,0.14) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 50% at 95% 20%, rgba(29,200,120,0.11) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 30% at 50% 35%, rgba(52,211,153,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 70% 50%, rgba(61,153,38,0.1) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 50% at 20% 65%, rgba(16,185,129,0.09) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 85% 75%, rgba(29,200,120,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 30% at 40% 90%, rgba(61,153,38,0.07) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 30% at 10% 50%, rgba(52,211,153,0.06) 0%, transparent 50%);
     background-attachment: fixed;
     color: var(--gray);
     font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -182,27 +184,27 @@
   .btn-cta-arrow {
     background: var(--accent);
     color: #ffffff;
-    border-radius: var(--r-pill);
-    padding: 14px 20px 14px 28px;
-    font-size: 15px;
-    font-weight: 500;
-    box-shadow: 0 4px 20px var(--accent-dim);
-    gap: 12px;
+    border-radius: 100px;
+    padding: 16px 28px 16px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(5,150,105,0.2);
+    gap: 10px;
   }
   .btn-cta-arrow:hover {
     background: var(--accent-bright);
-    box-shadow: 0 6px 30px var(--accent-glow);
-    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(5,150,105,0.3);
+    transform: translateY(-2px);
   }
   .btn-cta-arrow .arrow {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    background: rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   /* Buttons */
@@ -210,22 +212,22 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 24px;
-    border-radius: var(--r-sm);
+    padding: 14px 32px;
+    border-radius: 100px;
     font-family: 'Geist', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     text-decoration: none;
     cursor: pointer;
     border: none;
     transition: all 0.3s ease;
   }
-  .btn-primary { background: var(--white); color: var(--bg); }
-  .btn-primary:hover { background: #e0e0e0; transform: translateY(-1px); }
-  .btn-ghost { background: transparent; color: var(--white); border: 1px solid var(--border); }
-  .btn-ghost:hover { border-color: var(--border-hover); background: var(--surface); }
-  .btn-accent { background: var(--accent); color: #ffffff; box-shadow: 0 4px 20px var(--accent-dim); }
-  .btn-accent:hover { background: var(--accent-bright); box-shadow: 0 6px 30px var(--accent-glow); transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: #ffffff; box-shadow: 0 4px 20px rgba(5,150,105,0.2); }
+  .btn-primary:hover { background: var(--accent-bright); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(5,150,105,0.3); }
+  .btn-ghost { background: rgba(255,255,255,0.6); color: #334155; border: 1.5px solid rgba(0,0,0,0.1); backdrop-filter: blur(8px); }
+  .btn-ghost:hover { background: #ffffff; border-color: #0f172a; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+  .btn-accent { background: var(--accent); color: #ffffff; box-shadow: 0 4px 20px rgba(5,150,105,0.2); }
+  .btn-accent:hover { background: var(--accent-bright); box-shadow: 0 8px 30px rgba(5,150,105,0.3); transform: translateY(-2px); }
 
   .badge {
     display: inline-flex;
@@ -554,14 +556,7 @@
     white-space: nowrap;
   }
 
-  .hero-gradient {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 120px;
-    background: linear-gradient(to top, #f7f7f7, transparent);
-    z-index: 6;
-    pointer-events: none;
-  }
+  .hero-gradient { display: none; }
 
   /* ===== SECTIONS ===== */
   section { padding: 160px 0 0; position: relative; }
@@ -1058,7 +1053,6 @@
   /* ===== TABLET ===== */
   @media (max-width: 1024px) {
     .mockup-inner { height: 340px; }
-    .mock-sidebar { display: none; }
     .mock-stat-row { grid-template-columns: repeat(3, 1fr); }
     .mock-bottom-row { grid-template-columns: 1fr; }
     .mock-clients-card { display: none; }
@@ -1090,18 +1084,22 @@
     .hero h1 .highlight { padding: 0 8px; border-radius: 6px; }
     .hero .subtitle { max-width: 100%; font-size: 15px; line-height: 22px; margin-bottom: 20px; }
     .hero-ctas { flex-direction: column; align-items: center; }
-    .btn-cta-arrow { width: auto; justify-content: center; padding: 10px 20px 10px 22px; font-size: 13px; }
-    .btn-cta-arrow .arrow { width: 24px; height: 24px; font-size: 12px; }
+    .btn-cta-arrow { padding: 12px 22px 12px 24px; font-size: 14px; }
+    .btn-cta-arrow .arrow { width: 22px; height: 22px; font-size: 11px; }
     .badge { font-size: 11px; padding: 4px 10px; }
 
-    /* Buttons global mobile */
-    .btn { padding: 10px 18px; font-size: 13px; }
-    .btn-accent { padding: 10px 18px; font-size: 13px; }
-    .btn-ghost { padding: 10px 18px; font-size: 13px; }
+    /* Buttons global mobile - rounded-xl on mobile like genviral */
+    .btn { padding: 12px 24px; font-size: 14px; border-radius: 12px; }
+    .btn-accent { padding: 12px 24px; font-size: 14px; border-radius: 12px; }
+    .btn-ghost { padding: 12px 24px; font-size: 14px; border-radius: 12px; }
 
     /* Dashboard mockup */
     .hero-mockup { margin-top: 48px; }
-    .mockup-inner { height: 280px; }
+    .mockup-inner { height: 300px; }
+    .mock-sidebar { width: 120px; padding: 16px 8px; }
+    .mock-sidebar-logo { font-size: 11px; margin-bottom: 10px; padding: 4px 8px; }
+    .mock-sidebar-logo img { width: 14px; height: 14px; }
+    .mock-nav-item { font-size: 10px; padding: 6px 8px; gap: 6px; }
     .mockup-glow { width: 400px; height: 300px; top: -40px; }
     .mock-stat-row { grid-template-columns: repeat(3, 1fr); gap: 6px; }
     .mock-stat-box { padding: 12px; }
@@ -1132,7 +1130,7 @@
     .usp-content { padding: 28px 20px; }
     .usp-content h3 { font-size: 22px; }
     .usp-content p { font-size: 13px; line-height: 20px; }
-    .usp-content .btn { padding: 10px 18px; font-size: 13px; }
+    .usp-content .btn { padding: 12px 24px; font-size: 14px; border-radius: 12px; }
     .usp-visual { min-height: 240px; padding: 20px 16px; }
     .usp-visual [style*="grid-template-columns: 1fr 1fr 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; }
 
@@ -1165,7 +1163,7 @@
     .pricing-card { padding: 24px; gap: 24px; }
     .pricing-amount { font-size: 30px; }
     .pricing-features li { font-size: 13px; gap: 8px; }
-    .pricing-card .btn { font-size: 13px; padding: 10px 16px; }
+    .pricing-card .btn { font-size: 14px; padding: 12px 24px; border-radius: 12px; }
 
     /* Quote */
     .quote-section { padding: 36px 24px; }
@@ -1180,14 +1178,14 @@
     .cta-inner p { font-size: 14px; }
     .cta-section { padding: 80px 0; }
     .cta-inner .hero-ctas { gap: 8px; }
-    .cta-inner .hero-ctas .btn { padding: 10px 18px; font-size: 13px; }
+    .cta-inner .hero-ctas .btn { padding: 12px 24px; font-size: 14px; border-radius: 12px; }
 
     /* Footer */
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 
-    /* Watermarks on mobile - smaller but visible */
-    .chameleon-wm { max-width: 200px !important; max-height: 200px !important; opacity: 0.06 !important; }
+    /* Watermarks on mobile */
+    .chameleon-wm { max-width: 250px !important; max-height: 250px !important; opacity: 0.12 !important; filter: saturate(2.5) contrast(1.3) !important; }
 
     /* Logo ticker */
     .logo-ticker { gap: 24px; padding: 24px 0; }
@@ -1346,9 +1344,9 @@
           <tr><th style="text-align:left"></th><th>Traditional Agency</th><th>Freelancer</th><th class="col-accent">UGC100</th></tr>
         </thead>
         <tbody>
-          <tr><td>Cost per video</td><td class="dim">$150 &mdash; $250</td><td class="dim">$50 &mdash; $100</td><td class="accent-val">from $4.77</td></tr>
-          <tr><td>600 videos/mo</td><td class="dim">$90,000 &mdash; $150,000</td><td class="dim">$30,000 &mdash; $60,000</td><td class="accent-val">$4,400/mo</td></tr>
-          <tr><td>1,500 videos/mo</td><td class="dim">$225,000 &mdash; $375,000</td><td class="dim">$75,000 &mdash; $150,000</td><td class="accent-val">$8,900/mo</td></tr>
+          <tr><td>Cost per video</td><td class="dim">$150 – $250</td><td class="dim">$50 – $100</td><td class="accent-val">from $4.77</td></tr>
+          <tr><td>600 videos/mo</td><td class="dim">$90,000 – $150,000</td><td class="dim">$30,000 – $60,000</td><td class="accent-val">$4,400/mo</td></tr>
+          <tr><td>1,500 videos/mo</td><td class="dim">$225,000 – $375,000</td><td class="dim">$75,000 – $150,000</td><td class="accent-val">$8,900/mo</td></tr>
           <tr><td>3,000 videos/mo</td><td class="dim-italic">not possible</td><td class="dim-italic">not possible</td><td class="accent-val">$14,300/mo</td></tr>
           <tr><td>Delivery time</td><td class="dim">2&ndash;4 weeks</td><td class="dim">1&ndash;2 weeks</td><td class="accent-val">up to 24h</td></tr>
           <tr><td>Editing included</td><td class="dim">&#10005;</td><td class="dim">&#10005;</td><td class="accent-val">&#10003;</td></tr>
@@ -1428,7 +1426,7 @@
       <div class="usp-content">
         <span class="usp-tag">AI Generation</span>
         <h3>AI that creates, edits, and posts your content</h3>
-        <p>Create unlimited UGC-style videos with our AI pipeline. Every video looks native &mdash; selfie-cam perspective, real settings, authentic energy. No actors, no shoots, no delays.</p>
+        <p>Create unlimited UGC-style videos with our AI pipeline. Every video looks native. Selfie-cam perspective, real settings, authentic energy. No actors, no shoots, no delays.</p>
         <a href="https://app.ugc100.com/signup" class="btn btn-accent" style="width:fit-content">Get started</a>
       </div>
       <div class="usp-visual">
@@ -1495,11 +1493,11 @@
               <div class="pipe-col-head">PENDING <span>4</span></div>
               <div class="pipe-card">
                 <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero2.webp" class="pipe-thumb" alt="">
-                <div class="pipe-card-body"><span class="pipe-card-title">Summer collection promo</span><span class="pipe-tag tt">TikTok</span></div>
+                <div class="pipe-card-body"><span class="pipe-card-title">Balcony sunset selfie</span><span class="pipe-tag tt">TikTok</span></div>
               </div>
               <div class="pipe-card">
                 <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero10.webp" class="pipe-thumb" alt="">
-                <div class="pipe-card-body"><span class="pipe-card-title">Product unboxing #12</span><span class="pipe-tag ig">Instagram</span></div>
+                <div class="pipe-card-body"><span class="pipe-card-title">Skincare routine review</span><span class="pipe-tag ig">Instagram</span></div>
               </div>
             </div>
             <!-- GENERATING -->
@@ -1507,11 +1505,11 @@
               <div class="pipe-col-head">GENERATING <span>2</span></div>
               <div class="pipe-card">
                 <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero8.webp" class="pipe-thumb" alt="">
-                <div class="pipe-card-body"><span class="pipe-card-title">Travel vlog intro hook</span><span class="pipe-tag ai">AI Working</span></div>
+                <div class="pipe-card-body"><span class="pipe-card-title">Santorini travel vlog</span><span class="pipe-tag ai">AI Working</span></div>
               </div>
               <div class="pipe-card">
                 <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero4.webp" class="pipe-thumb" alt="">
-                <div class="pipe-card-body"><span class="pipe-card-title">Morning routine #8</span><span class="pipe-tag ig">Instagram</span></div>
+                <div class="pipe-card-body"><span class="pipe-card-title">Morning coffee walk</span><span class="pipe-tag ig">Instagram</span></div>
               </div>
             </div>
             <!-- READY -->
@@ -1519,7 +1517,7 @@
               <div class="pipe-col-head">READY <span>6</span></div>
               <div class="pipe-card">
                 <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero13.webp" class="pipe-thumb" alt="">
-                <div class="pipe-card-body"><span class="pipe-card-title">Beach sunset review</span><span class="pipe-tag tt">TikTok</span></div>
+                <div class="pipe-card-body"><span class="pipe-card-title">Pool day vlog</span><span class="pipe-tag tt">TikTok</span></div>
               </div>
               <div class="pipe-card">
                 <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero9.webp" class="pipe-thumb" alt="">
@@ -1531,11 +1529,11 @@
               <div class="pipe-col-head">POSTED <span>12</span></div>
               <div class="pipe-card">
                 <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero1.webp" class="pipe-thumb" alt="">
-                <div class="pipe-card-body"><span class="pipe-card-title">Hotel tour Berlin</span><span class="pipe-tag tt">TikTok</span></div>
+                <div class="pipe-card-body"><span class="pipe-card-title">Bali resort tour</span><span class="pipe-tag tt">TikTok</span></div>
               </div>
               <div class="pipe-card">
                 <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero12.webp" class="pipe-thumb" alt="">
-                <div class="pipe-card-body"><span class="pipe-card-title">Street food review</span><span class="pipe-tag ig">Instagram</span></div>
+                <div class="pipe-card-body"><span class="pipe-card-title">Amsterdam city walk</span><span class="pipe-tag ig">Instagram</span></div>
               </div>
             </div>
           </div>
@@ -1562,7 +1560,7 @@
     <div class="section-label">
       <div class="badge"><span class="dot"></span> AI-Powered</div>
       <h2>Smart creation, simply delivered</h2>
-      <p>Our AI-powered pipeline spots trends, generates hooks, and creates platform-optimized content &mdash; delivering clear, actionable videos without complex workflows.</p>
+      <p>Our pipeline spots trends, generates hooks, and creates platform-optimized content. Clear, actionable videos without complex workflows.</p>
     </div>
     <div class="logo-ticker">
       <span>@gaming &middot; 10.2M</span>
@@ -1591,7 +1589,7 @@
       <p>One platform for generation, pipeline management, team coordination, scheduling, and analytics.</p>
     </div>
     <div class="features-grid">
-      <div class="feature-card"><div class="feature-icon">&#9889;</div><h3>AI Video Generation</h3><p>Generate UGC-style videos with AI in seconds. Authentic, native-looking content &mdash; no creators needed.</p></div>
+      <div class="feature-card"><div class="feature-icon">&#9889;</div><h3>AI Video Generation</h3><p>Generate UGC-style videos in seconds. Authentic, native-looking content. No creators needed.</p></div>
       <div class="feature-card"><div class="feature-icon">&#9776;</div><h3>Content Pipeline</h3><p>From hook to post in one workflow. Track every video through Pending &rarr; Generating &rarr; Ready &rarr; Posted.</p></div>
       <div class="feature-card"><div class="feature-icon">&#10024;</div><h3>AI Captions & Hooks</h3><p>One click generates scroll-stopping hooks and platform-optimized captions with hashtags.</p></div>
       <div class="feature-card"><div class="feature-icon">&#128101;</div><h3>Team Management</h3><p>Assign editors, VAs, and admins with role-based access. Everyone sees only what they need.</p></div>
@@ -1628,7 +1626,7 @@
       <div class="reviews-col">
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>"UGC100 replaced 3 tools for us. We generate, manage, and post everything from one dashboard. The content pipeline changed everything &mdash; no more spreadsheets, no more chaos."</blockquote>
+          <blockquote>"UGC100 replaced 3 tools for us. We generate, manage, and post everything from one dashboard. The content pipeline changed everything. No more spreadsheets, no more chaos."</blockquote>
           <div class="review-author"><div class="review-avatar"></div><div class="review-meta"><span class="review-name">Sarah K.</span><span class="review-handle">Marketing Lead, D2C Brand</span></div></div>
         </div>
         <div class="review-card">
@@ -1650,7 +1648,7 @@
         </div>
         <div class="review-card">
           <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <blockquote>"We went from 10 videos a month to 200. The AI quality is insane &mdash; our audience can't tell the difference."</blockquote>
+          <blockquote>"We went from 10 videos a month to 200. The AI quality is insane. Our audience can't tell the difference."</blockquote>
           <div class="review-author"><div class="review-avatar"></div><div class="review-meta"><span class="review-name">Mike T.</span><span class="review-handle">Content Creator</span></div></div>
         </div>
         <div class="review-card">
@@ -1709,12 +1707,12 @@
           <li><span class="pf-check">&#10003;</span> 5 AI Personas</li>
           <li><span class="pf-check">&#10003;</span> 3 Team Members</li>
           <li><span class="pf-check">&#10003;</span> Content Pipeline</li>
-          <li class="disabled"><span class="pf-x">&mdash;</span> Advanced Analytics</li>
-          <li class="disabled"><span class="pf-x">&mdash;</span> Content Predictions</li>
-          <li class="disabled"><span class="pf-x">&mdash;</span> Smart Alerts</li>
-          <li class="disabled"><span class="pf-x">&mdash;</span> AI Automated Posting</li>
-          <li class="disabled"><span class="pf-x">&mdash;</span> AI Auto-Scheduling</li>
-          <li class="disabled"><span class="pf-x">&mdash;</span> API Access</li>
+          <li class="disabled"><span class="pf-x">&#8211;</span> Advanced Analytics</li>
+          <li class="disabled"><span class="pf-x">&#8211;</span> Content Predictions</li>
+          <li class="disabled"><span class="pf-x">&#8211;</span> Smart Alerts</li>
+          <li class="disabled"><span class="pf-x">&#8211;</span> AI Automated Posting</li>
+          <li class="disabled"><span class="pf-x">&#8211;</span> AI Auto-Scheduling</li>
+          <li class="disabled"><span class="pf-x">&#8211;</span> API Access</li>
           <li><span class="pf-check">&#10003;</span> Email Support</li>
         </ul>
         <a href="https://app.ugc100.com/signup" class="btn btn-ghost" style="justify-content:center">Get started</a>
@@ -1729,9 +1727,9 @@
           <li><span class="pf-check">&#10003;</span> Advanced Analytics</li>
           <li><span class="pf-check">&#10003;</span> Content Predictions</li>
           <li><span class="pf-check">&#10003;</span> Smart Alerts</li>
-          <li class="disabled"><span class="pf-x">&mdash;</span> AI Automated Posting</li>
-          <li class="disabled"><span class="pf-x">&mdash;</span> AI Auto-Scheduling</li>
-          <li class="disabled"><span class="pf-x">&mdash;</span> API Access</li>
+          <li class="disabled"><span class="pf-x">&#8211;</span> AI Automated Posting</li>
+          <li class="disabled"><span class="pf-x">&#8211;</span> AI Auto-Scheduling</li>
+          <li class="disabled"><span class="pf-x">&#8211;</span> API Access</li>
           <li><span class="pf-check">&#10003;</span> Priority Support</li>
         </ul>
         <a href="https://app.ugc100.com/signup" class="btn btn-accent" style="justify-content:center">Get started</a>
@@ -1802,7 +1800,7 @@
           <li><span class="pf-check">&#10003;</span> 3 editors included</li>
           <li><span class="pf-check">&#10003;</span> Custom dashboard</li>
           <li><span class="pf-check">&#10003;</span> AI auto-posting</li>
-          <li class="disabled"><span class="pf-x">&mdash;</span> Dedicated manager</li>
+          <li class="disabled"><span class="pf-x">&#8211;</span> Dedicated manager</li>
         </ul>
         <div class="pricing-setup" style="margin-top:-16px">additional costs: none</div>
         <a href="#" class="btn btn-ghost" style="justify-content:center">Get started</a>
@@ -1845,7 +1843,7 @@
         <div class="scale-content">
           <span class="scale-badge">Travly &middot; Gamelancer &middot; Live Clients</span>
           <h3>80M+ followers managed from one pipeline</h3>
-          <p>Travly runs 45+ travel accounts (40M followers, 2B monthly views) &mdash; from @india (8.3M) to @hotels (2M). Gamelancer operates the largest gaming network on TikTok (40M+ followers) with @gaming (10.2M) and @gamelancer (4.9M). All content through UGC100.</p>
+          <p>Travly runs 45+ travel accounts with 40M followers and 2B monthly views. From @india (8.3M) to @hotels (2M). Gamelancer operates the largest gaming network on TikTok with 40M+ followers. @gaming (10.2M), @gamelancer (4.9M). All content through UGC100.</p>
           <a href="https://app.ugc100.com/signup" class="btn btn-accent" style="width:fit-content">Get started</a>
         </div>
         <div class="scale-visual">
