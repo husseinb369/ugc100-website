@@ -698,6 +698,115 @@
   .scale-stat .num { font-size: 48px; font-weight: 500; color: var(--white); letter-spacing: -2px; line-height: 1; }
   .scale-stat .lbl { font-size: 14px; color: var(--gray); }
 
+  /* ===== PIPELINE FLOW ===== */
+  .pipe-flow {
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    background: #0a0a0a;
+    padding: 40px;
+    overflow-x: auto;
+    position: relative;
+    z-index: 1;
+  }
+  .pipe-flow-inner {
+    display: flex;
+    gap: 0;
+    min-width: 800px;
+  }
+  .pipe-flow-step {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+  .pipe-flow-num {
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    position: absolute;
+    margin-top: -12px;
+    margin-left: -4px;
+  }
+  .pipe-flow-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 16px;
+    position: relative;
+  }
+  .pipe-flow-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pipe-flow-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .pipe-flow-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .pipe-flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    font-size: 20px;
+    color: rgba(255,255,255,0.12);
+    flex-shrink: 0;
+  }
+  .pipe-flow-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pipe-flow-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 10px 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .pipe-flow-thumb {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .pf-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    display: block;
+  }
+  .pf-status {
+    font-size: 10px;
+    font-weight: 500;
+    display: block;
+    margin-top: 2px;
+  }
+  .pf-status.generating { color: #3d9926; }
+  .pf-status.queued { color: rgba(255,255,255,0.3); }
+  .pf-status.review { color: #3b82f6; }
+  .pf-status.approved { color: #10b981; }
+  .pf-status.posted { color: #10b981; }
+  .pf-status.scheduled { color: #f59e0b; }
+  @media (max-width: 640px) {
+    .pipe-flow { padding: 24px 16px; }
+    .pipe-flow-inner { min-width: 700px; }
+    .pipe-flow-num { font-size: 36px; }
+  }
+
   /* ===== UGC SLIDER ===== */
   .ugc-slider-wrap {
     overflow: hidden;
@@ -1481,13 +1590,7 @@
 
 <!-- UGC VIDEO SLIDER -->
 <section>
-  <div class="container">
-    <div class="section-label">
-      <div class="badge"><span class="dot"></span> Generated with UGC100</div>
-      <h2>Your audience won't believe<br>these aren't real creators</h2>
-    </div>
-  </div>
-  <div class="ugc-slider-wrap">
+  <div class="ugc-slider-wrap" style="padding-top:0">
     <div class="ugc-slider">
       <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero1.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero2.webp" alt=""><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
@@ -1508,7 +1611,7 @@
   <div class="container">
     <div class="section-label">
       <div class="badge"><span class="dot"></span> Why UGC100</div>
-      <h2>$4.77 per video vs $200 at an agency</h2>
+      <h2><span style="color:var(--accent)">$4.77</span> per video vs $200 at an agency</h2>
       <p>You do the math.</p>
     </div>
     <div class="comparison-wrapper">
@@ -1537,53 +1640,56 @@
   <div class="container">
     <div class="section-label">
       <div class="badge"><span class="dot"></span> Our Pipeline</div>
-      <h2>How our system works</h2>
-      <p>From script to screen in one automated flow. No manual work, no bottlenecks.</p>
+      <h2>How our <span style="color:var(--accent)">system</span> works</h2>
+      <p>From script to screen in one automated flow.</p>
     </div>
-    <div class="value-grid">
-      <div class="value-card">
-        <div class="value-text">
-          <h3>1. AI generates your UGC videos</h3>
-          <p>Pick a persona, enter your hook, and our AI creates authentic UGC-style videos in minutes. No creators, no shoots.</p>
-        </div>
-        <div class="value-visual">
-          <div class="onboarding-steps">
-            <div class="onboard-step done"><span class="step-icon">&#10003;</span> Hook generated</div>
-            <div class="onboard-step done"><span class="step-icon">&#10003;</span> Persona selected</div>
-            <div class="onboard-step active"><span class="step-icon">&#9889;</span> Video rendering...</div>
-          </div>
-        </div>
-      </div>
-      <div class="value-card">
-        <div class="value-text">
-          <h3>2. Your team edits & approves</h3>
-          <p>Content flows through your pipeline. Editors review, VAs organize, managers approve. Everyone sees only what they need.</p>
-        </div>
-        <div class="value-visual">
-          <div class="pipeline-visual" style="max-width:240px">
-            <div class="pipeline-col">
-              <div class="pipeline-col-header pending">Review</div>
-              <div class="pipeline-card"><span class="p-title">Skincare Haul</span><span class="p-meta">Editor: Sarah</span></div>
+    <!-- Pipeline flow mockup -->
+    <div class="pipe-flow">
+      <div class="pipe-flow-inner">
+        <!-- Step 1 -->
+        <div class="pipe-flow-step">
+          <div class="pipe-flow-num">01</div>
+          <div class="pipe-flow-card">
+            <div class="pipe-flow-header">
+              <span class="pipe-flow-icon" style="background:rgba(61,153,38,0.15);color:#3d9926">&#9889;</span>
+              <span class="pipe-flow-title">Generate</span>
             </div>
-            <div class="pipeline-col">
-              <div class="pipeline-col-header ready">Approved</div>
-              <div class="pipeline-card"><span class="p-title">Coffee Review</span><span class="p-meta">Ready to post</span></div>
-              <div class="pipeline-card"><span class="p-title">Gym Motivation</span><span class="p-meta">Ready to post</span></div>
+            <div class="pipe-flow-items">
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero4.webp" class="pipe-flow-thumb"><div><span class="pf-name">Morning coffee walk</span><span class="pf-status generating">Rendering 68%</span></div></div>
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero10.webp" class="pipe-flow-thumb"><div><span class="pf-name">Skincare routine</span><span class="pf-status generating">Rendering 23%</span></div></div>
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero2.webp" class="pipe-flow-thumb"><div><span class="pf-name">Sunset balcony</span><span class="pf-status queued">In queue</span></div></div>
             </div>
           </div>
+          <div class="pipe-flow-arrow">&rarr;</div>
         </div>
-      </div>
-      <div class="value-card">
-        <div class="value-text">
-          <h3>3. Auto-posted to all accounts</h3>
-          <p>Scheduled and published automatically to TikTok and Instagram. 107 accounts, zero manual posting.</p>
+        <!-- Step 2 -->
+        <div class="pipe-flow-step">
+          <div class="pipe-flow-num">02</div>
+          <div class="pipe-flow-card">
+            <div class="pipe-flow-header">
+              <span class="pipe-flow-icon" style="background:rgba(59,130,246,0.15);color:#3b82f6">&#9998;</span>
+              <span class="pipe-flow-title">Edit & Approve</span>
+            </div>
+            <div class="pipe-flow-items">
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero8.webp" class="pipe-flow-thumb"><div><span class="pf-name">Santorini travel vlog</span><span class="pf-status review">Review: Sarah K.</span></div></div>
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero1.webp" class="pipe-flow-thumb"><div><span class="pf-name">Bali resort tour</span><span class="pf-status approved">&#10003; Approved</span></div></div>
+            </div>
+          </div>
+          <div class="pipe-flow-arrow">&rarr;</div>
         </div>
-        <div class="value-visual">
-          <div class="onboarding-steps">
-            <div class="onboard-step done"><span class="step-icon">&#10003;</span> @travl.vibes &middot; posted</div>
-            <div class="onboard-step done"><span class="step-icon">&#10003;</span> @sunset.escapes &middot; posted</div>
-            <div class="onboard-step done"><span class="step-icon">&#10003;</span> @helena.travels &middot; posted</div>
-            <div class="onboard-step active"><span class="step-icon">&#8635;</span> 104 more scheduled</div>
+        <!-- Step 3 -->
+        <div class="pipe-flow-step">
+          <div class="pipe-flow-num">03</div>
+          <div class="pipe-flow-card">
+            <div class="pipe-flow-header">
+              <span class="pipe-flow-icon" style="background:rgba(16,185,129,0.15);color:#10b981">&#10003;</span>
+              <span class="pipe-flow-title">Auto-Post</span>
+            </div>
+            <div class="pipe-flow-items">
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero13.webp" class="pipe-flow-thumb"><div><span class="pf-name">Pool day vlog</span><span class="pf-status posted">@travel &middot; Posted</span></div></div>
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero9.webp" class="pipe-flow-thumb"><div><span class="pf-name">Couple city walk</span><span class="pf-status posted">@hotels &middot; Posted</span></div></div>
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero7.webp" class="pipe-flow-thumb"><div><span class="pf-name">Yoga in nature</span><span class="pf-status scheduled">@india &middot; 3pm</span></div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1732,7 +1838,7 @@
   <div class="container">
     <div class="section-label">
       <div class="badge"><span class="dot"></span> AI-Powered</div>
-      <h2>Smart creation, simply delivered</h2>
+      <h2>Smart creation, <span style="color:var(--accent)">simply delivered</span></h2>
       <p>Our pipeline spots trends, generates hooks, and creates platform-optimized content. Clear, actionable videos without complex workflows.</p>
     </div>
     <div class="logo-ticker">
@@ -1758,7 +1864,7 @@
   <div class="container">
     <div class="section-label">
       <div class="badge"><span class="dot"></span> Features</div>
-      <h2>Everything you need to run UGC at scale</h2>
+      <h2>Everything you need to run UGC <span style="color:var(--accent)">at scale</span></h2>
       <p>One platform for generation, pipeline management, team coordination, scheduling, and analytics.</p>
     </div>
     <div class="features-grid">
@@ -1779,7 +1885,7 @@
     <div class="reviews-header">
       <div class="reviews-header-left">
         <div class="badge"><span class="dot"></span> Testimonials</div>
-        <h2>Reviews that make us blush</h2>
+        <h2>Reviews that make us <span style="color:var(--accent)">blush</span></h2>
       </div>
       <a href="https://app.ugc100.com/signup" class="btn btn-ghost">Leave a review</a>
     </div>
@@ -2008,7 +2114,7 @@
   <div class="container">
     <div class="section-label">
       <div class="badge"><span class="dot"></span> Case Study</div>
-      <h2>Powering the world's largest media networks</h2>
+      <h2>Powering the world's largest <span style="color:var(--accent)">media networks</span></h2>
       <p>See how UGC100 powers Travly and Gamelancer's content engines across 80M+ combined followers.</p>
     </div>
     <div class="scale-section">
@@ -2080,7 +2186,7 @@
   <img src="logo.png" class="chameleon-wm" alt="" style="width:500px;height:500px;bottom:50px;left:50%;transform:translateX(-50%);">
   <div class="container">
     <div class="cta-inner">
-      <h2>Ready to make better decisions<br>with your content?</h2>
+      <h2>Ready to make <span style="color:var(--accent)">better decisions</span><br>with your content?</h2>
       <p>$4.77 per video vs $200 at an agency. You do the math.</p>
       <div class="hero-ctas">
         <a href="https://app.ugc100.com/signup" class="btn btn-accent">Get started</a>
@@ -2111,6 +2217,21 @@
 </footer>
 
 <script>
+// Auto-scroll slider
+const autoSlider = document.querySelector('.ugc-slider');
+if (autoSlider) {
+  let autoDir = 1;
+  setInterval(() => {
+    autoSlider.scrollLeft += autoDir;
+    if (autoSlider.scrollLeft >= autoSlider.scrollWidth - autoSlider.clientWidth) autoDir = -1;
+    if (autoSlider.scrollLeft <= 0) autoDir = 1;
+  }, 30);
+  autoSlider.addEventListener('mousedown', () => autoDir = 0);
+  autoSlider.addEventListener('touchstart', () => autoDir = 0);
+  autoSlider.addEventListener('mouseup', () => { setTimeout(() => autoDir = 1, 3000); });
+  autoSlider.addEventListener('touchend', () => { setTimeout(() => autoDir = 1, 3000); });
+}
+
 // Slide play toggle
 document.querySelectorAll('.ugc-slide').forEach(slide => {
   slide.addEventListener('click', () => {
