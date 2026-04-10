@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UGC100 — AI-Powered UGC Operating System</title>
+<meta name="description" content="Generate, manage, and post UGC content at scale. AI video creation, content pipeline, team management, and auto-posting in one platform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+  @font-face { font-family: 'Geist'; src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+  @font-face { font-family: 'Geist'; src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+  @font-face { font-family: 'Geist'; src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+  @font-face { font-family: 'Geist'; src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+  @font-face { font-family: 'Geist'; src: url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/Geist-Black.woff2') format('woff2'); font-weight: 900; font-display: swap; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0c;
+    --bg-elevated: #111114;
+    --bg-card: #16161a;
+    --bg-card-hover: #1c1c21;
+    --surface: #1a1a1f;
+    --border: #2a2a30;
+    --border-subtle: #1e1e24;
+    --text: #e8e8ec;
+    --text-secondary: #8a8a95;
+    --text-muted: #5a5a65;
+    --accent: #3d9926;
+    --accent-bright: #4db82e;
+    --accent-dim: #2d7a1a;
+    --accent-glow: rgba(61, 153, 38, 0.15);
+    --accent-glow-strong: rgba(61, 153, 38, 0.3);
+    --white: #ffffff;
+    --red: #e54545;
+    --font-display: 'Geist', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--white);
+  }
+
+  /* ---- NOISE TEXTURE OVERLAY ---- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ---- CONTAINER ---- */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .container-wide {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 16px 0;
+    background: rgba(10, 10, 12, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .nav-logo img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+
+  .nav-logo span {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 450;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 550;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--white);
+    box-shadow: 0 0 20px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-bright);
+    box-shadow: 0 0 40px var(--accent-glow-strong), inset 0 1px 0 rgba(255,255,255,0.15);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--text-secondary);
+    background: var(--surface);
+  }
+
+  .btn-large {
+    padding: 14px 28px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    padding: 180px 0 80px;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--accent-glow);
+    border: 1px solid rgba(61, 153, 38, 0.25);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent-bright);
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-badge::before { display: none; }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 80px);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--white);
+    max-width: 800px;
+    margin: 0 auto 24px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent-bright);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .hero-note {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .hero-mockup {
+    margin-top: 64px;
+    position: relative;
+  }
+
+  .hero-mockup-inner {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 80px var(--accent-glow);
+    overflow: hidden;
+  }
+
+  .mockup-placeholder {
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--surface) 100%);
+    border-radius: 13px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-family: var(--font-mono);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mockup-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, transparent 0%, transparent calc(100% / 6), var(--border-subtle) calc(100% / 6), var(--border-subtle) calc(100% / 6 + 1px), transparent calc(100% / 6 + 1px)),
+      linear-gradient(0deg, transparent 0%, transparent 33%, var(--border-subtle) 33%, var(--border-subtle) calc(33% + 1px), transparent calc(33% + 1px));
+    opacity: 0.3;
+  }
+
+  /* ---- PROBLEM / SOLUTION ---- */
+  .problem-section {
+    padding: 120px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent-bright);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4.5vw, 52px);
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .section-subtitle {
+    font-size: 17px;
+    color: var(--text-secondary);
+    max-width: 540px;
+    line-height: 1.7;
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+    background: var(--border-subtle);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .problem-card {
+    background: var(--bg-card);
+    padding: 40px 32px;
+    transition: background 0.3s;
+  }
+
+  .problem-card:hover { background: var(--bg-card-hover); }
+
+  .problem-card .pain {
+    font-size: 13px;
+    color: var(--red);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .problem-card .pain::before {
+    content: '\2715';
+    font-size: 11px;
+  }
+
+  .problem-card h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .problem-card p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .problem-card .solution {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-subtle);
+    font-size: 14px;
+    color: var(--accent-bright);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .problem-card .solution::before {
+    content: '\2713';
+    font-size: 12px;
+    background: var(--accent-dim);
+    color: var(--white);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ---- FEATURES GRID ---- */
+  .features-section {
+    padding: 120px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+    background: var(--border-subtle);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .feature-card {
+    background: var(--bg-card);
+    padding: 40px 32px;
+    transition: all 0.3s;
+    position: relative;
+  }
+
+  .feature-card:hover {
+    background: var(--bg-card-hover);
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-glow);
+    border: 1px solid rgba(61, 153, 38, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+
+  .feature-card h3 {
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* ---- HOW IT WORKS ---- */
+  .how-section {
+    padding: 120px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    margin-top: 64px;
+    position: relative;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: calc(100% / 6);
+    right: calc(100% / 6);
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent-dim), var(--accent), var(--accent-dim));
+    opacity: 0.4;
+  }
+
+  .step {
+    text-align: center;
+    position: relative;
+  }
+
+  .step-number {
+    width: 56px;
+    height: 56px;
+    background: var(--bg-card);
+    border: 2px solid var(--accent-dim);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--accent-bright);
+    position: relative;
+    z-index: 1;
+  }
+
+  .step h3 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .step p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  /* ---- FEATURE DETAILS ---- */
+  .detail-section {
+    padding: 100px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .detail-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-bottom: 120px;
+  }
+
+  .detail-row:last-child { margin-bottom: 0; }
+
+  .detail-row.reversed { direction: rtl; }
+  .detail-row.reversed > * { direction: ltr; }
+
+  .detail-content .detail-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent-bright);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .detail-content h3 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3vw, 36px);
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.04em;
+  }
+
+  .detail-content p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .detail-visual {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: var(--font-mono);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .detail-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-glow) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* ---- CASE STUDY ---- */
+  .case-study {
+    padding: 120px 0;
+    border-top: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  .case-study::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background: linear-gradient(180deg, var(--accent-glow) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .case-study-header {
+    text-align: center;
+    margin-bottom: 64px;
+    position: relative;
+  }
+
+  .case-study-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    position: relative;
+  }
+
+  .case-study-story h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .case-study-story p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .case-study-quote {
+    padding: 24px 28px;
+    background: var(--bg-card);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    margin-top: 32px;
+  }
+
+  .case-study-quote p {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 450;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border-subtle);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .stat-card .stat-value {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--accent-bright);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-card .stat-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-weight: 450;
+  }
+
+  /* ---- COMPARISON ---- */
+  .comparison-section {
+    padding: 120px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .comparison-table {
+    margin-top: 64px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 16px 24px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .comparison-table th {
+    background: var(--surface);
+    font-weight: 600;
+    color: var(--text);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .comparison-table th:nth-child(2) {
+    background: var(--accent-dim);
+    color: var(--white);
+  }
+
+  .comparison-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .comparison-table td:nth-child(2) {
+    background: rgba(61, 153, 38, 0.05);
+    font-weight: 600;
+  }
+
+  .comparison-table td { color: var(--text-secondary); }
+
+  .comparison-table tr:last-child td { border-bottom: none; }
+
+  .check { color: var(--accent-bright); font-size: 18px; }
+  .cross { color: var(--text-muted); font-size: 14px; }
+  .partial { color: #d4a843; font-size: 13px; }
+
+  /* ---- PRICING ---- */
+  .pricing-section {
+    padding: 120px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .pricing-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .pricing-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 48px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pricing-tab {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 550;
+    cursor: pointer;
+    transition: all 0.25s;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+  }
+
+  .pricing-tab.active {
+    background: var(--accent);
+    color: var(--white);
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+
+  .pricing-tab:not(.active):hover {
+    color: var(--text);
+    background: var(--bg-card);
+  }
+
+  .pricing-grid {
+    display: none;
+    gap: 2px;
+    background: var(--border-subtle);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .pricing-grid.active { display: grid; }
+
+  .pricing-grid.managed { grid-template-columns: repeat(4, 1fr); }
+  .pricing-grid.selfservice { grid-template-columns: repeat(3, 1fr); }
+
+  .pricing-card {
+    background: var(--bg-card);
+    padding: 40px 28px;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .pricing-card:hover { background: var(--bg-card-hover); }
+
+  .pricing-card.popular::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-align: center;
+    padding: 6px;
+  }
+
+  .pricing-card.popular { padding-top: 64px; }
+
+  .pricing-tier {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .pricing-price {
+    font-family: var(--font-display);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pricing-price span {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+  }
+
+  .pricing-setup {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .pricing-features {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .pricing-features li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .pricing-features li:last-child { border-bottom: none; }
+
+  .pricing-features li::before {
+    content: '\2713';
+    color: var(--accent-bright);
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .pricing-features li.disabled {
+    color: var(--text-muted);
+  }
+
+  .pricing-features li.disabled::before {
+    content: '\2014';
+    color: var(--text-muted);
+  }
+
+  .pricing-card .btn { width: 100%; justify-content: center; }
+
+  .pricing-note {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* ---- TESTIMONIALS ---- */
+  .testimonials-section {
+    padding: 120px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+    background: var(--border-subtle);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .testimonial-card {
+    background: var(--bg-card);
+    padding: 40px 32px;
+  }
+
+  .testimonial-stars {
+    color: #e5a843;
+    font-size: 14px;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+
+  .testimonial-card blockquote {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 450;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1.55;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-author {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* ---- FAQ ---- */
+  .faq-section {
+    padding: 120px 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .faq-list {
+    max-width: 720px;
+    margin: 64px auto 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 24px 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 550;
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--accent-bright); }
+
+  .faq-question::after {
+    content: '+';
+    font-size: 22px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: transform 0.3s, color 0.3s;
+  }
+
+  .faq-item.open .faq-question::after {
+    transform: rotate(45deg);
+    color: var(--accent-bright);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 200px;
+    padding-bottom: 24px;
+  }
+
+  .faq-answer p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ---- BOTTOM CTA ---- */
+  .bottom-cta {
+    padding: 120px 0;
+    text-align: center;
+    position: relative;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .bottom-cta::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .bottom-cta h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 56px);
+    color: var(--white);
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .bottom-cta p {
+    font-size: 17px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .bottom-cta .hero-ctas { position: relative; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    border-top: 1px solid var(--border-subtle);
+    padding: 64px 0 32px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
+  .footer-col h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 14px;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--text); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 16px;
+  }
+
+  .footer-social a {
+    color: var(--text-muted);
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-social a:hover { color: var(--text); }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .problem-grid,
+    .features-grid,
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; gap: 32px; }
+    .steps::before { display: none; }
+    .detail-row,
+    .detail-row.reversed { grid-template-columns: 1fr; gap: 32px; direction: ltr; }
+    .case-study-content { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .pricing-grid.managed { grid-template-columns: 1fr; }
+    .pricing-grid.selfservice { grid-template-columns: 1fr; }
+    .comparison-table { font-size: 12px; }
+    .comparison-table th, .comparison-table td { padding: 10px 12px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .hero-ctas { flex-direction: column; align-items: center; }
+    .nav-links { display: none; }
+  }
+
+  /* ---- CHAMELEON MASCOT ---- */
+  .chameleon-watermark {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.04;
+    z-index: 0;
+  }
+
+  .chameleon-watermark.hero-bg {
+    top: 60px;
+    right: -120px;
+    width: 700px;
+    height: 700px;
+  }
+
+  .chameleon-watermark.case-study-bg {
+    top: -60px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    transform: scaleX(-1);
+  }
+
+  .chameleon-watermark.cta-bg {
+    bottom: -40px;
+    right: -80px;
+    width: 400px;
+    height: 400px;
+  }
+
+  .chameleon-divider {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    opacity: 0.12;
+  }
+
+  .chameleon-divider img {
+    width: 48px;
+    height: 48px;
+    filter: grayscale(1) brightness(2);
+  }
+
+  .chameleon-icon-inline {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 6px;
+    opacity: 0.7;
+    filter: brightness(1.5);
+  }
+
+  .hero-badge img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(1.2) saturate(1.2);
+  }
+
+  .feature-icon img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(1.3);
+  }
+
+  .step-chameleon {
+    width: 32px;
+    height: 32px;
+    opacity: 0.15;
+    margin: 16px auto 0;
+    display: block;
+    filter: grayscale(1) brightness(2);
+  }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .animate-in:nth-child(1) { animation-delay: 0s; }
+  .animate-in:nth-child(2) { animation-delay: 0.1s; }
+  .animate-in:nth-child(3) { animation-delay: 0.2s; }
+  .animate-in:nth-child(4) { animation-delay: 0.3s; }
+  .animate-in:nth-child(5) { animation-delay: 0.4s; }
+  .animate-in:nth-child(6) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<nav>
+  <div class="container">
+    <a href="/" class="nav-logo">
+      <img src="logo.png" alt="UGC100">
+      <span>UGC100</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#case-study">Case Study</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="https://app.ugc100.com/signup" class="btn btn-primary">Get Started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <img src="logo.png" class="chameleon-watermark hero-bg" alt="">
+  <div class="container">
+    <div class="hero-badge animate-in"><img src="logo.png" alt=""> Built from real operations</div>
+    <h1 class="animate-in">The AI system that runs your <em>entire social media</em></h1>
+    <p class="hero-sub animate-in">Content that creates itself, posts itself, scales itself. We scaled 53 accounts before we opened this to you. Now it's your turn.</p>
+    <div class="hero-ctas animate-in">
+      <a href="#pricing" class="btn btn-primary btn-large">See Plans</a>
+      <a href="#case-study" class="btn btn-secondary btn-large">See Case Study</a>
+    </div>
+    <p class="hero-note animate-in">14-day free trial &mdash; no credit card required</p>
+    <div class="hero-mockup animate-in">
+      <div class="hero-mockup-inner">
+        <div class="mockup-placeholder">[ Dashboard Screenshot ]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PROBLEM / SOLUTION ==================== -->
+<section class="problem-section">
+  <div class="container">
+    <div class="section-label">The Problem</div>
+    <h2 class="section-title">Other tools give you buttons.<br>We give you a production machine.</h2>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="pain">No production pipeline</div>
+        <h3>Videos get lost between tools</h3>
+        <p>Most tools stop at generation. You still need spreadsheets, Slack threads, and manual tracking to get a video from idea to post.</p>
+        <div class="solution">Full Kanban workflow from hook to post</div>
+      </div>
+      <div class="problem-card">
+        <div class="pain">No team coordination</div>
+        <h3>Everyone's confused about what to do</h3>
+        <p>Editors don't know what's assigned. VAs don't know what to post. Managers don't know what's stuck. No single source of truth.</p>
+        <div class="solution">Role-based access for editors, VAs, admins</div>
+      </div>
+      <div class="problem-card">
+        <div class="pain">Built by developers, not operators</div>
+        <h3>Features nobody actually needs</h3>
+        <p>Built from pitch decks, not production floors. No understanding of what breaks at scale &mdash; failed jobs, content buffers, account warmups.</p>
+        <div class="solution">Battle-tested on 53 accounts before launch</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="chameleon-divider"><img src="logo.png" alt=""></div>
+
+<!-- ==================== FEATURES ==================== -->
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything you need to run<br>UGC at scale</h2>
+    <p class="section-subtitle">One platform for generation, pipeline management, team coordination, scheduling, and analytics.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#9889;</div>
+        <h3>AI Video Generation</h3>
+        <p>Generate UGC-style videos with AI in seconds. Authentic, native-looking content &mdash; no creators needed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#9776;</div>
+        <h3>Content Pipeline</h3>
+        <p>From hook to post in one workflow. Track every video through Pending &rarr; Generating &rarr; Ready &rarr; Uploaded &rarr; Posted.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#10024;</div>
+        <h3>AI Captions & Hooks</h3>
+        <p>One click generates scroll-stopping hooks and platform-optimized captions with hashtags. Powered by AI.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128101;</div>
+        <h3>Team Management</h3>
+        <p>Assign editors, VAs, and admins with role-based access. Everyone sees only what they need.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128197;</div>
+        <h3>Calendar & Scheduling</h3>
+        <p>Plan your content calendar visually. Auto-scheduler distributes posts for optimal timing. Drag and drop to reschedule.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#127760;</div>
+        <h3>Multi-Account Management</h3>
+        <p>Manage TikTok and Instagram accounts from one dashboard. Assign personas, track performance, scale without chaos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section class="how-section">
+  <div class="container">
+    <div class="section-label" style="text-align:center">How It Works</div>
+    <h2 class="section-title" style="text-align:center">Three steps to scaled UGC</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Generate</h3>
+        <p>Create AI-powered UGC videos and hooks with one click. Choose from multiple AI models and persona styles.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Manage</h3>
+        <p>Organize your content pipeline with a visual Kanban board. Assign editors, track progress, schedule posts on a calendar.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Post</h3>
+        <p>Auto-post to TikTok and Instagram or export for manual upload. Track performance and optimize your strategy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FEATURE DETAILS ==================== -->
+<section class="detail-section">
+  <div class="container">
+    <div class="detail-row">
+      <div class="detail-content">
+        <div class="detail-tag">AI Generation</div>
+        <h3>AI that creates, edits, and posts your content automatically.</h3>
+        <p>Create unlimited UGC-style videos with our AI pipeline. Every video looks native &mdash; selfie-cam perspective, real settings, authentic energy. No actors, no shoots, no delays.</p>
+      </div>
+      <div class="detail-visual">[ Pipeline Screenshot ]</div>
+    </div>
+    <div class="detail-row reversed">
+      <div class="detail-content">
+        <div class="detail-tag">Pipeline</div>
+        <h3>Every video, tracked from idea to post.</h3>
+        <p>Visual Kanban board tracks every piece of content from hook creation to published post. Never lose track of what's pending, in progress, or ready. Your editors and VAs see exactly what needs their attention.</p>
+      </div>
+      <div class="detail-visual">[ Kanban Screenshot ]</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-content">
+        <div class="detail-tag">Scheduling</div>
+        <h3>Imagine waking up to content already posted on every platform.</h3>
+        <p>See your entire content calendar at a glance. Auto-scheduler distributes posts across accounts for maximum reach. Drag and drop to reschedule. AI generates captions for each scheduled post.</p>
+      </div>
+      <div class="detail-visual">[ Calendar Screenshot ]</div>
+    </div>
+    <div class="detail-row reversed">
+      <div class="detail-content">
+        <div class="detail-tag">AI Hooks</div>
+        <h3>Hooks that stop the scroll.</h3>
+        <p>Generate proven hooks across 3 categories &mdash; Curiosity, FOMO, and Fear Removal. One click creates platform-optimized captions with trending hashtags. 21 battle-tested hook formulas built in.</p>
+      </div>
+      <div class="detail-visual">[ Hook Generator Screenshot ]</div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-content">
+        <div class="detail-tag">Team</div>
+        <h3>Your whole team, one dashboard.</h3>
+        <p>Role-based access for owners, admins, editors, and VAs. Invite with one click. Everyone sees only what they need &mdash; editors see their assigned content, VAs see their posting queue, owners see everything.</p>
+      </div>
+      <div class="detail-visual">[ Team Screenshot ]</div>
+    </div>
+    <div class="detail-row reversed">
+      <div class="detail-content">
+        <div class="detail-tag">Analytics</div>
+        <h3>Know what works. Cut what doesn't.</h3>
+        <p>Track which hooks, personas, and content types drive the most engagement. Measure ROI across all accounts. Make data-driven decisions about your content strategy.</p>
+      </div>
+      <div class="detail-visual">[ Analytics Screenshot ]</div>
+    </div>
+  </div>
+</section>
+
+<div class="chameleon-divider"><img src="logo.png" alt=""></div>
+
+<!-- ==================== CASE STUDY ==================== -->
+<section class="case-study" id="case-study">
+  <img src="logo.png" class="chameleon-watermark case-study-bg" alt="">
+  <div class="container">
+    <div class="case-study-header">
+      <div class="section-label">Case Study</div>
+      <h2 class="section-title">How we scaled a travel brand<br>to 53 accounts</h2>
+      <p class="section-subtitle" style="margin:16px auto 0">We built UGC100 because we needed it ourselves.</p>
+    </div>
+    <div class="case-study-content">
+      <div class="case-study-story">
+        <h3>The Challenge</h3>
+        <p>Scale a travel brand across dozens of TikTok and Instagram accounts with authentic UGC content, posted daily, without hiring a single creator.</p>
+        <h3>The Solution</h3>
+        <p>We built an AI-powered production pipeline &mdash; automated hook generation, a distributed team posting across all accounts, editors processing content, and intelligent scheduling. All managed from one dashboard.</p>
+        <h3>The Result</h3>
+        <p>A fully automated content machine. From hook text to published TikTok in one pipeline. No spreadsheets, no chaos, no missed posts.</p>
+        <div class="case-study-quote">
+          <p>"Everything you see in UGC100 was built to solve our own problem first. Every feature exists because we needed it at scale."</p>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">53</div>
+          <div class="stat-label">Active Accounts</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">165+</div>
+          <div class="stat-label">AI Videos Produced</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">7</div>
+          <div class="stat-label">Team Members Coordinated</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">24/7</div>
+          <div class="stat-label">Automated Pipeline</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== COMPARISON ==================== -->
+<section class="comparison-section">
+  <div class="container">
+    <div class="section-label" style="text-align:center">Comparison</div>
+    <h2 class="section-title" style="text-align:center">Unlike tools that just generate videos&hellip;</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th style="text-align:left">Feature</th>
+          <th>UGC100</th>
+          <th>AI Video Tools</th>
+          <th>Scheduling Tools</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AI Video Generation</td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+        </tr>
+        <tr>
+          <td>AI Hooks & Captions</td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+        </tr>
+        <tr>
+          <td>Content Pipeline (Kanban)</td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+        </tr>
+        <tr>
+          <td>Team Roles & Permissions</td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+          <td><span class="check">&#10003;</span></td>
+        </tr>
+        <tr>
+          <td>Calendar & Scheduling</td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+          <td><span class="check">&#10003;</span></td>
+        </tr>
+        <tr>
+          <td>Auto-Posting</td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+          <td><span class="check">&#10003;</span></td>
+        </tr>
+        <tr>
+          <td>Multi-Account Management</td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+          <td><span class="check">&#10003;</span></td>
+        </tr>
+        <tr>
+          <td>UGC-Native Content</td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="cross">&mdash;</span></td>
+        </tr>
+        <tr>
+          <td>Battle-Tested Operations</td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+        </tr>
+        <tr>
+          <td>Done-For-You Service</td>
+          <td><span class="check">&#10003;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+          <td><span class="cross">&mdash;</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="chameleon-divider"><img src="logo.png" alt=""></div>
+
+<!-- ==================== PRICING ==================== -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Simple, transparent pricing</h2>
+      <p class="section-subtitle" style="margin:12px auto 0">Start free for 14 days. Upgrade when you're ready.</p>
+    </div>
+
+    <div class="pricing-tabs">
+      <button class="pricing-tab active" onclick="switchPricing('managed')">Managed Pipeline</button>
+      <button class="pricing-tab" onclick="switchPricing('selfservice')">Self-Service Dashboard</button>
+    </div>
+
+    <!-- MANAGED -->
+    <div class="pricing-grid managed active" id="pricing-managed">
+      <div class="pricing-card">
+        <div class="pricing-tier">Growth</div>
+        <div class="pricing-price">$2,600<span>/mo</span></div>
+        <div class="pricing-setup">+ $2,960 setup fee</div>
+        <ul class="pricing-features">
+          <li>600 videos/mo (20/day)</li>
+          <li>10 social accounts</li>
+          <li>10 AI personas</li>
+          <li>1 editor included</li>
+          <li>Custom dashboard</li>
+          <li class="disabled">AI auto-posting</li>
+          <li class="disabled">Dedicated manager</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Book a Demo</a>
+      </div>
+      <div class="pricing-card popular">
+        <div class="pricing-tier">Business</div>
+        <div class="pricing-price">$4,400<span>/mo</span></div>
+        <div class="pricing-setup">+ $2,960 setup fee</div>
+        <ul class="pricing-features">
+          <li>1,500 videos/mo (50/day)</li>
+          <li>30 social accounts</li>
+          <li>25 AI personas</li>
+          <li>2 editors included</li>
+          <li>Custom dashboard</li>
+          <li>AI auto-posting</li>
+          <li class="disabled">Dedicated manager</li>
+        </ul>
+        <a href="#" class="btn btn-primary">Book a Demo</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">Scale</div>
+        <div class="pricing-price">$8,000<span>/mo</span></div>
+        <div class="pricing-setup">+ $4,400 setup fee</div>
+        <ul class="pricing-features">
+          <li>3,000 videos/mo (100/day)</li>
+          <li>50+ social accounts</li>
+          <li>50+ AI personas</li>
+          <li>3 editors included</li>
+          <li>Custom dashboard</li>
+          <li>AI auto-posting</li>
+          <li>Dedicated manager</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Book a Demo</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-price" style="font-size:32px">Custom</div>
+        <div class="pricing-setup">Custom setup</div>
+        <ul class="pricing-features">
+          <li>Unlimited videos</li>
+          <li>Unlimited accounts</li>
+          <li>Unlimited personas</li>
+          <li>Custom editor team</li>
+          <li>Custom dashboard</li>
+          <li>AI auto-posting</li>
+          <li>Dedicated manager</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">Contact Sales</a>
+      </div>
+    </div>
+
+    <!-- SELF-SERVICE -->
+    <div class="pricing-grid selfservice" id="pricing-selfservice">
+      <div class="pricing-card">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-price">$47<span>/mo</span></div>
+        <div class="pricing-setup">&nbsp;</div>
+        <ul class="pricing-features">
+          <li>AI content creation (credits separate)</li>
+          <li>5 AI personas</li>
+          <li>3 team members</li>
+          <li>Content pipeline</li>
+          <li class="disabled">Advanced analytics</li>
+          <li class="disabled">Content predictions</li>
+          <li class="disabled">AI automated posting</li>
+          <li class="disabled">API access</li>
+          <li>Email support</li>
+        </ul>
+        <a href="https://app.ugc100.com/signup" class="btn btn-secondary">Start Free Trial</a>
+      </div>
+      <div class="pricing-card popular">
+        <div class="pricing-tier">Growth</div>
+        <div class="pricing-price">$147<span>/mo</span></div>
+        <div class="pricing-setup">&nbsp;</div>
+        <ul class="pricing-features">
+          <li>AI content creation (credits separate)</li>
+          <li>25 AI personas</li>
+          <li>10 team members</li>
+          <li>Content pipeline</li>
+          <li>Advanced analytics</li>
+          <li>Content predictions</li>
+          <li class="disabled">AI automated posting</li>
+          <li class="disabled">API access</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="https://app.ugc100.com/signup" class="btn btn-primary">Start Free Trial</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">Scale</div>
+        <div class="pricing-price">$297<span>/mo</span></div>
+        <div class="pricing-setup">&nbsp;</div>
+        <ul class="pricing-features">
+          <li>AI content creation (credits separate)</li>
+          <li>Unlimited AI personas</li>
+          <li>Unlimited team members</li>
+          <li>Content pipeline</li>
+          <li>Advanced analytics</li>
+          <li>Content predictions + full automation</li>
+          <li>AI automated posting</li>
+          <li>API access</li>
+          <li>Dedicated manager</li>
+        </ul>
+        <a href="https://app.ugc100.com/signup" class="btn btn-secondary">Start Free Trial</a>
+      </div>
+    </div>
+
+    <p class="pricing-note">All plans include a 14-day free trial. No credit card required. Cancel anytime.</p>
+  </div>
+</section>
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-label" style="text-align:center">Testimonials</div>
+    <h2 class="section-title" style="text-align:center">What our users say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"UGC100 replaced 3 tools for us. We generate, manage, and post everything from one dashboard."</blockquote>
+        <div class="testimonial-author">Marketing Lead, D2C Brand</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"We went from 10 videos a month to 200. The AI quality is insane &mdash; our audience can't tell the difference."</blockquote>
+        <div class="testimonial-author">Content Creator</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"Finally a tool built for teams. My editors see their queue, VAs see their posts, I see everything."</blockquote>
+        <div class="testimonial-author">Agency Owner</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ ==================== -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-label" style="text-align:center">FAQ</div>
+    <h2 class="section-title" style="text-align:center">Frequently asked questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What is UGC100?</button>
+        <div class="faq-answer"><p>UGC100 is an AI-powered operating system for UGC content. It combines AI video generation, content pipeline management, team collaboration, scheduling, and analytics in one platform.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What's the difference between Managed Pipeline and Self-Service?</button>
+        <div class="faq-answer"><p>Managed Pipeline is done-for-you: we handle video generation, editing, scheduling, and posting. Self-Service gives you the dashboard to run it yourself.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Do I need to hire creators?</button>
+        <div class="faq-answer"><p>No. UGC100 generates authentic UGC-style videos using proprietary AI models. The content looks native to TikTok and Instagram &mdash; selfie-cam, real settings, genuine energy.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What platforms do you support?</button>
+        <div class="faq-answer"><p>TikTok and Instagram for posting. We generate 9:16 vertical video content optimized for short-form platforms.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">How does the free trial work?</button>
+        <div class="faq-answer"><p>You get full access to the Self-Service Dashboard for 14 days. No credit card required. After the trial, choose a plan to continue.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I manage multiple brands?</button>
+        <div class="faq-answer"><p>Yes. Each brand gets its own workspace with separate accounts, personas, team, and content.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">What AI models do you use?</button>
+        <div class="faq-answer"><p>We use proprietary AI models fine-tuned for UGC content. Our pipeline handles video generation, hook creation, caption writing, and character briefs &mdash; all optimized for short-form social media.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can my whole team use it?</button>
+        <div class="faq-answer"><p>Absolutely. Invite editors, VAs, and admins with role-based access. Everyone sees only what they need.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">Can I cancel anytime?</button>
+        <div class="faq-answer"><p>Yes. Cancel from your dashboard settings. Your subscription runs until the end of the billing period.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BOTTOM CTA ==================== -->
+<section class="bottom-cta">
+  <img src="logo.png" class="chameleon-watermark cta-bg" alt="">
+  <div class="container">
+    <h2 class="section-title">AI-powered social media<br>that never sleeps.</h2>
+    <p>Join creators and brands using AI to produce content at scale. Start free today.</p>
+    <div class="hero-ctas">
+      <a href="https://app.ugc100.com/signup" class="btn btn-primary btn-large">Start Your Free Trial</a>
+      <a href="#pricing" class="btn btn-secondary btn-large">See Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">
+          <img src="logo.png" alt="UGC100" style="width:28px;height:28px">
+          <span>UGC100</span>
+        </a>
+        <p>AI-powered UGC operating system. Generate, manage, and post content at scale.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#">Changelog</a>
+        <a href="#">Roadmap</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Help Center</a>
+        <a href="#">API Docs</a>
+        <a href="#">Status</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Imprint</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 UGC100. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#">Twitter/X</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function switchPricing(type) {
+    document.querySelectorAll('.pricing-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.pricing-grid').forEach(g => g.classList.remove('active'));
+
+    if (type === 'managed') {
+      document.querySelector('.pricing-tab:first-child').classList.add('active');
+      document.getElementById('pricing-managed').classList.add('active');
+    } else {
+      document.querySelector('.pricing-tab:last-child').classList.add('active');
+      document.getElementById('pricing-selfservice').classList.add('active');
+    }
+  }
+
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // Scroll-triggered animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.feature-card, .problem-card, .step, .detail-row, .stat-card, .testimonial-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
