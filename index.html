@@ -1175,6 +1175,7 @@
     font-weight: 500;
   }
   .comparison-table tr:last-child td { border-bottom: none; }
+  .comparison-table .mobile-header { display: none; }
   .comparison-table .dim { color: rgba(128,128,128,0.5); }
   .comparison-table .dim-italic { color: rgba(128,128,128,0.35); font-style: italic; }
   .comparison-table .accent-val {
@@ -1439,10 +1440,31 @@
     .usp-visual { min-height: 240px; padding: 20px 16px; }
     .usp-visual [style*="grid-template-columns: 1fr 1fr 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; }
 
-    /* Comparison table */
-    .comparison-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -16px; padding: 0 16px; border-radius: var(--r-md); }
-    .comparison-table { min-width: 520px; font-size: 13px; }
-    .comparison-table th, .comparison-table td { padding: 14px 16px; }
+    /* Comparison table - stack on mobile */
+    .comparison-wrapper { border-radius: var(--r-md); overflow: hidden; }
+    .comparison-table { min-width: 0; font-size: 13px; }
+    .comparison-table thead { display: none; }
+    .comparison-table .mobile-header { display: grid; }
+    .comparison-table tbody tr {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .comparison-table td { padding: 0; text-align: center; border: none; }
+    .comparison-table td:first-child {
+      grid-column: 1 / -1;
+      text-align: left;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    .comparison-table .accent-val { font-size: 12px; }
+    .comparison-table .dim, .comparison-table .dim-italic { font-size: 11px; }
+    .comparison-table .mobile-header td:first-child { display: none; }
+    .comparison-table .mobile-header { background: var(--surface); padding: 10px 16px; position: sticky; top: 0; }
 
     /* Scale section */
     .scale-content { padding: 32px 20px; }
@@ -1706,6 +1728,7 @@
           <tr><th style="text-align:left"></th><th>Traditional Agency</th><th>Freelancer</th><th class="col-accent">UGC100</th></tr>
         </thead>
         <tbody>
+          <tr class="mobile-header"><td></td><td class="dim" style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">Agency</td><td class="dim" style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">Freelancer</td><td class="accent-val" style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em">UGC100</td></tr>
           <tr><td>Cost per video</td><td class="dim">$150 – $250</td><td class="dim">$50 – $100</td><td class="accent-val">from $4.77</td></tr>
           <tr><td>600 videos/mo</td><td class="dim">$90,000 – $150,000</td><td class="dim">$30,000 – $60,000</td><td class="accent-val">$4,400/mo</td></tr>
           <tr><td>1,500 videos/mo</td><td class="dim">$225,000 – $375,000</td><td class="dim">$75,000 – $150,000</td><td class="accent-val">$8,900/mo</td></tr>
