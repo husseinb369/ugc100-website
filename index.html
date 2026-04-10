@@ -1227,26 +1227,80 @@
   .pricing-toggle { display: flex; background: var(--bg-2); border-radius: var(--r-pill); padding: 4px; }
   .pricing-toggle button { padding: 10px 20px; border: none; background: transparent; color: var(--gray); font-family: 'Geist', sans-serif; font-size: 14px; font-weight: 500; border-radius: var(--r-pill); cursor: pointer; transition: all 0.3s; }
   .pricing-toggle button.active { background: var(--bg); color: var(--white); }
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .pricing-grid.hidden { display: none; }
-  .pricing-card { padding: 40px; display: flex; flex-direction: column; gap: 32px; border-right: 1px solid var(--border); position: relative; }
-  .pricing-card:last-child { border-right: none; }
-  .pricing-card.popular { background: rgba(255,255,255,0.02); }
-  .pricing-card.popular::before { content: 'Most Popular'; position: absolute; top: 12px; right: 12px; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: var(--r-pill); background: var(--accent); color: #ffffff; }
-  .pricing-header { display: flex; flex-direction: column; gap: 16px; }
-  .pricing-tier { font-size: 16px; font-weight: 500; color: var(--white); }
-  .pricing-price { display: flex; align-items: baseline; gap: 4px; }
-  .pricing-amount { font-size: 40px; font-weight: 500; color: var(--white); letter-spacing: -1px; line-height: 1; }
-  .pricing-period { font-size: 14px; color: var(--gray); }
+  .pricing-card {
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    position: relative;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(8px);
+  }
+  .pricing-card.popular {
+    border-color: var(--accent);
+    box-shadow: 0 8px 30px rgba(61,153,38,0.08);
+  }
+  .pricing-card.popular::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 5px 16px;
+    border-radius: var(--r-pill);
+    background: var(--accent);
+    color: #ffffff;
+    white-space: nowrap;
+  }
+  .pricing-header { display: flex; flex-direction: column; gap: 12px; }
+  .pricing-tier { font-size: 24px; font-weight: 700; color: var(--white); }
+  .pricing-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
+  .pricing-price { display: flex; align-items: baseline; gap: 4px; margin-top: 4px; }
+  .pricing-amount { font-size: 44px; font-weight: 700; color: var(--white); letter-spacing: -2px; line-height: 1; }
+  .pricing-period { font-size: 15px; color: var(--gray); }
   .pricing-setup { font-size: 13px; color: var(--gray); }
-  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .pricing-card .btn {
+    border-radius: 100px;
+    justify-content: center;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .pricing-card.popular .btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 20px rgba(5,150,105,0.2);
+  }
+  .pricing-card:not(.popular) .btn {
+    background: transparent;
+    color: var(--white);
+    border: 1.5px solid var(--border);
+  }
+  .pricing-included {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--white);
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
   .pricing-features li { font-size: 14px; line-height: 20px; display: flex; align-items: center; gap: 10px; color: var(--gray); }
-  .pricing-features li .pf-check { color: var(--accent-bright); }
-  .pricing-features li .pf-x { color: rgba(128,128,128,0.3); }
-  .pricing-features li.disabled { opacity: 0.4; }
+  .pricing-features li .pf-check { color: var(--accent); font-size: 16px; }
+  .pricing-features li .pf-x { color: rgba(128,128,128,0.25); font-size: 16px; }
+  .pricing-features li.disabled { opacity: 0.35; }
   .pricing-note { text-align: center; font-size: 14px; color: var(--gray); margin-top: 32px; }
   .managed-grid { grid-template-columns: repeat(4, 1fr); }
-  .managed-grid .pricing-setup { font-size: 12px; color: var(--accent-bright); }
+  .managed-grid .pricing-setup { font-size: 12px; color: var(--accent); }
   .managed-grid .pricing-setup + .pricing-setup { color: var(--gray); }
 
   /* ===== QUOTE ===== */
@@ -1317,8 +1371,6 @@
     .usp-visual { min-height: 300px; }
     .scale-inner { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr; }
-    .pricing-card { border-right: none; border-bottom: 1px solid var(--border); }
-    .pricing-card:last-child { border-bottom: none; }
     .managed-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     .reviews-header, .blog-header { flex-direction: column; align-items: flex-start; gap: 16px; }
@@ -1980,24 +2032,35 @@
     </div>
     <div class="pricing-grid" id="pricing-selfservice">
       <div class="pricing-card">
-        <div class="pricing-header"><div class="pricing-tier">Starter</div><div class="pricing-price"><span class="pricing-amount">$47</span><span class="pricing-period">/mo</span></div></div>
+        <div class="pricing-header">
+          <div class="pricing-tier">Starter</div>
+          <div class="pricing-desc">Perfect for small teams getting started with UGC content.</div>
+          <div class="pricing-price"><span class="pricing-amount">$47</span><span class="pricing-period">/month</span></div>
+        </div>
+        <a href="https://app.ugc100.com/signup" class="btn">Get Started &rarr;</a>
+        <div class="pricing-included">WHAT'S INCLUDED</div>
         <ul class="pricing-features">
           <li><span class="pf-check">&#10003;</span> AI Content Creation (credits separate)</li>
           <li><span class="pf-check">&#10003;</span> 5 AI Personas</li>
           <li><span class="pf-check">&#10003;</span> 3 Team Members</li>
           <li><span class="pf-check">&#10003;</span> Content Pipeline</li>
-          <li class="disabled"><span class="pf-x">&#8211;</span> Advanced Analytics</li>
-          <li class="disabled"><span class="pf-x">&#8211;</span> Content Predictions</li>
-          <li class="disabled"><span class="pf-x">&#8211;</span> Smart Alerts</li>
-          <li class="disabled"><span class="pf-x">&#8211;</span> AI Automated Posting</li>
-          <li class="disabled"><span class="pf-x">&#8211;</span> AI Auto-Scheduling</li>
-          <li class="disabled"><span class="pf-x">&#8211;</span> API Access</li>
+          <li class="disabled"><span class="pf-x">&#9675;</span> Advanced Analytics</li>
+          <li class="disabled"><span class="pf-x">&#9675;</span> Content Predictions</li>
+          <li class="disabled"><span class="pf-x">&#9675;</span> Smart Alerts</li>
+          <li class="disabled"><span class="pf-x">&#9675;</span> AI Automated Posting</li>
+          <li class="disabled"><span class="pf-x">&#9675;</span> AI Auto-Scheduling</li>
+          <li class="disabled"><span class="pf-x">&#9675;</span> API Access</li>
           <li><span class="pf-check">&#10003;</span> Email Support</li>
         </ul>
-        <a href="https://app.ugc100.com/signup" class="btn btn-ghost" style="justify-content:center">Get started</a>
       </div>
       <div class="pricing-card popular">
-        <div class="pricing-header"><div class="pricing-tier">Growth</div><div class="pricing-price"><span class="pricing-amount">$147</span><span class="pricing-period">/mo</span></div></div>
+        <div class="pricing-header">
+          <div class="pricing-tier">Growth</div>
+          <div class="pricing-desc">Complete solution for growing businesses and agencies.</div>
+          <div class="pricing-price"><span class="pricing-amount">$147</span><span class="pricing-period">/month</span></div>
+        </div>
+        <a href="https://app.ugc100.com/signup" class="btn">Get Started &rarr;</a>
+        <div class="pricing-included">WHAT'S INCLUDED</div>
         <ul class="pricing-features">
           <li><span class="pf-check">&#10003;</span> AI Content Creation (credits separate)</li>
           <li><span class="pf-check">&#10003;</span> 25 AI Personas</li>
@@ -2006,15 +2069,20 @@
           <li><span class="pf-check">&#10003;</span> Advanced Analytics</li>
           <li><span class="pf-check">&#10003;</span> Content Predictions</li>
           <li><span class="pf-check">&#10003;</span> Smart Alerts</li>
-          <li class="disabled"><span class="pf-x">&#8211;</span> AI Automated Posting</li>
-          <li class="disabled"><span class="pf-x">&#8211;</span> AI Auto-Scheduling</li>
-          <li class="disabled"><span class="pf-x">&#8211;</span> API Access</li>
+          <li class="disabled"><span class="pf-x">&#9675;</span> AI Automated Posting</li>
+          <li class="disabled"><span class="pf-x">&#9675;</span> AI Auto-Scheduling</li>
+          <li class="disabled"><span class="pf-x">&#9675;</span> API Access</li>
           <li><span class="pf-check">&#10003;</span> Priority Support</li>
         </ul>
-        <a href="https://app.ugc100.com/signup" class="btn btn-accent" style="justify-content:center">Get started</a>
       </div>
       <div class="pricing-card">
-        <div class="pricing-header"><div class="pricing-tier">Scale</div><div class="pricing-price"><span class="pricing-amount">$297</span><span class="pricing-period">/mo</span></div></div>
+        <div class="pricing-header">
+          <div class="pricing-tier">Scale</div>
+          <div class="pricing-desc">Advanced features for established brands and agencies.</div>
+          <div class="pricing-price"><span class="pricing-amount">$297</span><span class="pricing-period">/month</span></div>
+        </div>
+        <a href="https://app.ugc100.com/signup" class="btn">Get Started &rarr;</a>
+        <div class="pricing-included">WHAT'S INCLUDED</div>
         <ul class="pricing-features">
           <li><span class="pf-check">&#10003;</span> AI Content Creation (credits separate)</li>
           <li><span class="pf-check">&#10003;</span> Unlimited AI Personas</li>
@@ -2028,7 +2096,6 @@
           <li><span class="pf-check">&#10003;</span> API Access</li>
           <li><span class="pf-check">&#10003;</span> Dedicated Manager</li>
         </ul>
-        <a href="https://app.ugc100.com/signup" class="btn btn-ghost" style="justify-content:center">Get started</a>
       </div>
     </div>
     <div class="pricing-grid managed-grid hidden" id="pricing-managed">
@@ -2222,10 +2289,10 @@ const autoSlider = document.querySelector('.ugc-slider');
 if (autoSlider) {
   let autoDir = 1;
   setInterval(() => {
-    autoSlider.scrollLeft += autoDir;
+    autoSlider.scrollLeft += autoDir * 2;
     if (autoSlider.scrollLeft >= autoSlider.scrollWidth - autoSlider.clientWidth) autoDir = -1;
     if (autoSlider.scrollLeft <= 0) autoDir = 1;
-  }, 30);
+  }, 16);
   autoSlider.addEventListener('mousedown', () => autoDir = 0);
   autoSlider.addEventListener('touchstart', () => autoDir = 0);
   autoSlider.addEventListener('mouseup', () => { setTimeout(() => autoDir = 1, 3000); });
