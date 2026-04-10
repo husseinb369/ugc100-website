@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>UGC100 — AI-Powered UGC Operating System</title>
 <meta name="description" content="Generate, manage, and post UGC content at scale. AI video creation, content pipeline, team management, and auto-posting in one platform.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +44,8 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+  html, body { max-width: 100vw; overflow-x: hidden; }
 
   body {
     background: var(--bg);
@@ -702,6 +703,195 @@
   .scale-stat .num { font-size: 48px; font-weight: 500; color: var(--white); letter-spacing: -2px; line-height: 1; }
   .scale-stat .lbl { font-size: 14px; color: var(--gray); }
 
+  /* ===== PIPELINE MOCKUP ===== */
+  .pipe-mockup {
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
+  }
+  .pipe-inner {
+    background: #0a0a0a;
+    display: flex;
+    min-height: 380px;
+    color: #fff;
+  }
+  .pipe-sidebar {
+    width: 160px;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .pipe-nav {
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.35);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pipe-nav.active { color: #fff; }
+  .pipe-dot {
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.1);
+    flex-shrink: 0;
+  }
+  .pipe-dot.green { background: #3d9926; }
+  .pipe-main {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+  .pipe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pipe-title { font-size: 15px; font-weight: 600; }
+  .pipe-btn-ghost {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .pipe-btn-green {
+    font-size: 11px;
+    color: #fff;
+    padding: 5px 14px;
+    border-radius: 6px;
+    background: #3d9926;
+  }
+  .pipe-kanban {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    flex: 1;
+  }
+  .pipe-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pipe-col-head {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.4);
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .pipe-col-head span { color: rgba(255,255,255,0.2); margin-left: 4px; }
+  .pipe-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .pipe-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .pipe-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+  }
+  .pipe-card-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pipe-tag {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    width: fit-content;
+    font-weight: 500;
+  }
+  .pipe-tag.tt { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.35); }
+  .pipe-tag.ig { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.35); }
+  .pipe-tag.ai { background: rgba(61,153,38,0.15); color: #4db82e; }
+  .pipe-stats {
+    width: 180px;
+    flex-shrink: 0;
+    border-left: 1px solid rgba(255,255,255,0.06);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .pipe-stats-title {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.4);
+    text-align: right;
+  }
+  .pipe-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+  .pipe-stat-num {
+    font-size: 28px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .pipe-stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    font-style: italic;
+  }
+  .pipe-stat-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 2px;
+  }
+  .pipe-stat-bar div {
+    height: 100%;
+    background: #3d9926;
+    border-radius: 2px;
+  }
+  @media (max-width: 1024px) {
+    .pipe-sidebar { display: none; }
+    .pipe-stats { display: none; }
+    .pipe-kanban { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .pipe-kanban { grid-template-columns: 1fr; }
+    .pipe-main { padding: 16px; }
+    .pipe-thumb { width: 36px; height: 36px; }
+  }
+
   /* ===== COMPARISON TABLE ===== */
   .comparison-wrapper {
     border: 1px solid var(--border);
@@ -996,8 +1186,8 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 
-    /* Watermarks smaller on mobile */
-    .chameleon-wm { display: none; }
+    /* Watermarks on mobile - smaller but visible */
+    .chameleon-wm { max-width: 200px !important; max-height: 200px !important; opacity: 0.06 !important; }
 
     /* Logo ticker */
     .logo-ticker { gap: 24px; padding: 24px 0; }
@@ -1270,57 +1460,93 @@
         </div>
       </div>
     </div>
-    <div class="usp-block reversed">
-      <div class="usp-content">
-        <span class="usp-tag">Content Pipeline</span>
-        <h3>Every video, tracked from idea to post</h3>
-        <p>Visual Kanban board tracks every piece of content from hook creation to published post. Never lose track of what's pending, in progress, or ready. Your editors and VAs see exactly what needs their attention.</p>
-        <a href="https://app.ugc100.com/signup" class="btn btn-accent" style="width:fit-content">Get started</a>
-      </div>
-      <div class="usp-visual" style="background:#0a0a0a;padding:24px">
-        <!-- Pipeline dashboard mockup matching the real UI -->
-        <div style="width:100%;max-width:480px;display:flex;flex-direction:column;gap:12px;color:#fff">
+    <!-- PIPELINE FULL-WIDTH MOCKUP -->
+    <div class="section-label" style="margin-top:80px">
+      <div class="badge"><span class="dot"></span> Content Pipeline</div>
+      <h2>Every video, tracked from idea to post</h2>
+      <p>Visual Kanban board tracks every piece of content from hook creation to published post.</p>
+    </div>
+    <div class="pipe-mockup">
+      <div class="pipe-inner">
+        <!-- Sidebar -->
+        <div class="pipe-sidebar">
+          <div class="pipe-nav active"><span class="pipe-dot green"></span> Pipeline</div>
+          <div class="pipe-nav"><span class="pipe-dot"></span> Calendar</div>
+          <div class="pipe-nav"><span class="pipe-dot"></span> AI Generation</div>
+          <div class="pipe-nav"><span class="pipe-dot"></span> Hooks</div>
+          <div class="pipe-nav"><span class="pipe-dot"></span> Team</div>
+          <div class="pipe-nav"><span class="pipe-dot"></span> Accounts</div>
+          <div class="pipe-nav"><span class="pipe-dot"></span> Analytics</div>
+        </div>
+        <!-- Main -->
+        <div class="pipe-main">
           <!-- Header -->
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-            <span style="font-size:14px;font-weight:600;color:#fff">Content Pipeline</span>
-            <div style="display:flex;gap:8px;align-items:center">
-              <span style="font-size:11px;color:rgba(255,255,255,0.4);padding:4px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.08)">Filter</span>
-              <span style="font-size:11px;color:#fff;padding:4px 12px;border-radius:6px;background:#3d9926">+ New Video</span>
+          <div class="pipe-header">
+            <span class="pipe-title">Content Pipeline</span>
+            <div style="display:flex;gap:8px">
+              <span class="pipe-btn-ghost">Filter</span>
+              <span class="pipe-btn-green">+ New Video</span>
             </div>
           </div>
-          <!-- Kanban columns -->
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">
+          <!-- Kanban -->
+          <div class="pipe-kanban">
             <!-- PENDING -->
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.4);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.06)">Pending <span style="color:rgba(255,255,255,0.2)">4</span></div>
-              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;font-weight:500;color:#fff">Summer collection promo</span><span style="font-size:9px;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;width:fit-content">TikTok</span></div>
-              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;font-weight:500;color:#fff">Product unboxing #12</span><span style="font-size:9px;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;width:fit-content">Instagram</span></div>
+            <div class="pipe-col">
+              <div class="pipe-col-head">PENDING <span>4</span></div>
+              <div class="pipe-card">
+                <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero2.webp" class="pipe-thumb" alt="">
+                <div class="pipe-card-body"><span class="pipe-card-title">Summer collection promo</span><span class="pipe-tag tt">TikTok</span></div>
+              </div>
+              <div class="pipe-card">
+                <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero10.webp" class="pipe-thumb" alt="">
+                <div class="pipe-card-body"><span class="pipe-card-title">Product unboxing #12</span><span class="pipe-tag ig">Instagram</span></div>
+              </div>
             </div>
             <!-- GENERATING -->
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.4);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.06)">Generating <span style="color:rgba(255,255,255,0.2)">2</span></div>
-              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;font-weight:500;color:#fff">Travel vlog intro hook</span><span style="font-size:9px;color:#4db82e;background:rgba(61,153,38,0.12);padding:2px 6px;border-radius:4px;width:fit-content">AI Working</span></div>
-              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;font-weight:500;color:#fff">Morning routine #8</span><span style="font-size:9px;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;width:fit-content">Instagram</span></div>
+            <div class="pipe-col">
+              <div class="pipe-col-head">GENERATING <span>2</span></div>
+              <div class="pipe-card">
+                <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero8.webp" class="pipe-thumb" alt="">
+                <div class="pipe-card-body"><span class="pipe-card-title">Travel vlog intro hook</span><span class="pipe-tag ai">AI Working</span></div>
+              </div>
+              <div class="pipe-card">
+                <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero4.webp" class="pipe-thumb" alt="">
+                <div class="pipe-card-body"><span class="pipe-card-title">Morning routine #8</span><span class="pipe-tag ig">Instagram</span></div>
+              </div>
             </div>
             <!-- READY -->
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.4);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.06)">Ready <span style="color:rgba(255,255,255,0.2)">6</span></div>
-              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;font-weight:500;color:#fff">Beach sunset review</span><span style="font-size:9px;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;width:fit-content">TikTok</span></div>
+            <div class="pipe-col">
+              <div class="pipe-col-head">READY <span>6</span></div>
+              <div class="pipe-card">
+                <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero13.webp" class="pipe-thumb" alt="">
+                <div class="pipe-card-body"><span class="pipe-card-title">Beach sunset review</span><span class="pipe-tag tt">TikTok</span></div>
+              </div>
+              <div class="pipe-card">
+                <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero9.webp" class="pipe-thumb" alt="">
+                <div class="pipe-card-body"><span class="pipe-card-title">Couple city walk</span><span class="pipe-tag tt">TikTok</span></div>
+              </div>
             </div>
             <!-- POSTED -->
-            <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.4);padding-bottom:6px;border-bottom:1px solid rgba(255,255,255,0.06)">Posted <span style="color:rgba(255,255,255,0.2)">12</span></div>
-              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;font-weight:500;color:#fff">Hotel tour Berlin</span><span style="font-size:9px;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;width:fit-content">TikTok</span></div>
-              <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:11px;font-weight:500;color:#fff">Street food review</span><span style="font-size:9px;color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;width:fit-content">Instagram</span></div>
+            <div class="pipe-col">
+              <div class="pipe-col-head">POSTED <span>12</span></div>
+              <div class="pipe-card">
+                <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero1.webp" class="pipe-thumb" alt="">
+                <div class="pipe-card-body"><span class="pipe-card-title">Hotel tour Berlin</span><span class="pipe-tag tt">TikTok</span></div>
+              </div>
+              <div class="pipe-card">
+                <img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero12.webp" class="pipe-thumb" alt="">
+                <div class="pipe-card-body"><span class="pipe-card-title">Street food review</span><span class="pipe-tag ig">Instagram</span></div>
+              </div>
             </div>
           </div>
-          <!-- Today's stats bar -->
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06)">
-            <div style="text-align:center"><span style="font-size:18px;font-weight:600;color:#fff;display:block">24</span><span style="font-size:9px;color:rgba(255,255,255,0.35)">Videos today</span></div>
-            <div style="text-align:center"><span style="font-size:18px;font-weight:600;color:#fff;display:block">53</span><span style="font-size:9px;color:rgba(255,255,255,0.35)">Active accounts</span></div>
-            <div style="text-align:center"><span style="font-size:18px;font-weight:600;color:#fff;display:block">97%</span><span style="font-size:9px;color:rgba(255,255,255,0.35)">Success rate</span></div>
-            <div style="text-align:center"><span style="font-size:18px;font-weight:600;color:#fff;display:block">7</span><span style="font-size:9px;color:rgba(255,255,255,0.35)">Team online</span></div>
-          </div>
+        </div>
+        <!-- Stats panel -->
+        <div class="pipe-stats">
+          <div class="pipe-stats-title">TODAY'S STATS</div>
+          <div class="pipe-stat-item"><span class="pipe-stat-num">24</span><span class="pipe-stat-label">Videos posted today</span><div class="pipe-stat-bar"><div style="width:80%"></div></div></div>
+          <div class="pipe-stat-item"><span class="pipe-stat-num">53</span><span class="pipe-stat-label">Active accounts</span><div class="pipe-stat-bar"><div style="width:65%"></div></div></div>
+          <div class="pipe-stat-item"><span class="pipe-stat-num">97%</span><span class="pipe-stat-label">Success rate</span><div class="pipe-stat-bar"><div style="width:97%"></div></div></div>
+          <div class="pipe-stat-item"><span class="pipe-stat-num">7</span><span class="pipe-stat-label">Team members online</span><div class="pipe-stat-bar"><div style="width:45%"></div></div></div>
         </div>
       </div>
     </div>
