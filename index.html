@@ -853,15 +853,19 @@
   .divider img { width: 32px; height: 32px; opacity: 0.6; }
 
   /* ===== RESPONSIVE ===== */
+  /* ===== TABLET ===== */
   @media (max-width: 1024px) {
     .mockup-inner { height: 340px; }
     .mock-sidebar { display: none; }
     .mock-stat-row { grid-template-columns: repeat(3, 1fr); }
     .mock-bottom-row { grid-template-columns: 1fr; }
     .mock-clients-card { display: none; }
-    .value-grid, .features-grid, .reviews-grid, .blog-grid { grid-template-columns: 1fr; }
+    .value-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .reviews-grid, .blog-grid { grid-template-columns: 1fr; }
     .usp-block { grid-template-columns: 1fr; }
     .usp-block.reversed { direction: ltr; }
+    .usp-visual { min-height: 300px; }
     .scale-inner { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr; }
     .pricing-card { border-right: none; border-bottom: 1px solid var(--border); }
@@ -870,24 +874,120 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     .reviews-header, .blog-header { flex-direction: column; align-items: flex-start; gap: 16px; }
     .quote-section { padding: 48px 32px; }
+    .comparison-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .comparison-table { min-width: 600px; }
   }
+
+  /* ===== MOBILE ===== */
   @media (max-width: 640px) {
-    section { padding: 120px 0 0; }
-    .hero { padding: 160px 16px 0; }
-    .hero h1 { font-size: 40px; letter-spacing: -2px; }
-    .hero .subtitle { max-width: 100%; }
-    .section-label h2 { font-size: 28px; letter-spacing: -1px; }
-    .section-label { margin-bottom: 48px; }
+    section { padding: 100px 0 0; }
+
+    /* Hero */
+    .hero { padding: 130px 16px 0; }
+    .hero h1 { font-size: 36px; letter-spacing: -1.5px; line-height: 1.15em; }
+    .hero h1 .highlight { padding: 0 8px; border-radius: 6px; }
+    .hero .subtitle { max-width: 100%; font-size: 16px; line-height: 24px; margin-bottom: 24px; }
+    .hero-ctas { flex-direction: column; align-items: center; }
+    .btn-cta-arrow { width: 100%; justify-content: center; }
+    .badge { font-size: 12px; padding: 5px 12px; }
+
+    /* Dashboard mockup */
+    .hero-mockup { margin-top: 48px; }
+    .mockup-inner { height: 280px; }
+    .mockup-glow { width: 400px; height: 300px; top: -40px; }
+    .mock-stat-row { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .mock-stat-box { padding: 12px; }
+    .mock-stat-box .stat-value { font-size: 18px; }
+    .mock-stat-box .stat-title { font-size: 9px; }
+    .mock-stat-box .stat-change { font-size: 9px; }
+    .mock-main { padding: 14px; gap: 8px; }
+    .mock-big-number .num { font-size: 20px; }
+    .mock-chart-header .chart-title { font-size: 10px; }
+    .mock-chart-toggle span { font-size: 8px; padding: 3px 6px; }
+    .mock-months span { font-size: 7px; }
+
+    /* Sections */
+    .section-label h2 { font-size: 26px; letter-spacing: -1px; }
+    .section-label p { font-size: 16px; line-height: 24px; }
+    .section-label { margin-bottom: 40px; }
+
+    /* Nav */
     .nav-pill a:not(.nav-cta) { display: none; }
-    .usp-content { padding: 40px 24px; }
-    .usp-visual { min-height: 300px; padding: 32px 24px; }
-    .scale-content { padding: 40px 24px; }
-    .scale-visual { padding: 40px 24px; }
-    .scale-stat .num { font-size: 36px; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .mock-stat-row { grid-template-columns: 1fr 1fr 1fr; }
+    .nav-pill { padding: 6px 6px 6px 6px; }
+
+    /* Value cards */
+    .value-text { padding: 28px; }
+    .value-text h3 { font-size: 16px; }
+    .value-visual { min-height: 220px; padding: 20px; }
+
+    /* USP blocks */
+    .usp-content { padding: 32px 20px; }
+    .usp-content h3 { font-size: 24px; }
+    .usp-content p { font-size: 14px; }
+    .usp-visual { min-height: 260px; padding: 24px 20px; }
+
+    /* Comparison table */
+    .comparison-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -16px; padding: 0 16px; border-radius: var(--r-md); }
+    .comparison-table { min-width: 520px; font-size: 13px; }
+    .comparison-table th, .comparison-table td { padding: 14px 16px; }
+
+    /* Scale section */
+    .scale-content { padding: 32px 20px; }
+    .scale-content h3 { font-size: 24px; }
+    .scale-visual { padding: 32px 20px; }
+    .scale-stat .num { font-size: 32px; }
+    .scale-stats { gap: 20px; }
+
+    /* Features */
+    .features-grid { grid-template-columns: 1fr; }
+    .feature-card { padding: 28px; }
+    .feature-card h3 { font-size: 16px; }
+
+    /* Reviews */
+    .review-card { padding: 24px; }
+    .review-card blockquote { font-size: 14px; line-height: 22px; }
+
+    /* FAQ */
+    .faq-question { font-size: 15px; padding: 20px 0; }
+    .faq-answer-inner { font-size: 14px; line-height: 22px; }
+
+    /* Pricing */
+    .pricing-card { padding: 28px; }
+    .pricing-amount { font-size: 32px; }
+
+    /* Quote */
+    .quote-section { padding: 36px 24px; }
+    .quote-inner blockquote { font-size: 17px; line-height: 28px; }
+
+    /* Blog */
+    .blog-grid { grid-template-columns: 1fr; }
+    .blog-image { height: 160px; }
+
+    /* CTA */
+    .cta-inner h2 { font-size: 28px; letter-spacing: -1px; }
+    .cta-inner p { font-size: 16px; }
+    .cta-section { padding: 100px 0; }
+
+    /* Footer */
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+
+    /* Watermarks smaller on mobile */
     .chameleon-wm { display: none; }
-    .mock-big-number .num { font-size: 24px; }
+
+    /* Logo ticker */
+    .logo-ticker { gap: 24px; padding: 24px 0; }
+    .logo-ticker span { font-size: 12px; }
+  }
+
+  /* ===== SMALL MOBILE ===== */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 30px; }
+    .mock-stat-row { grid-template-columns: 1fr 1fr; }
+    .mockup-inner { height: 320px; }
+    .pricing-amount { font-size: 28px; }
+    .section-label h2 { font-size: 22px; }
+    .footer-grid { grid-template-columns: 1fr; }
   }
 
   /* ===== ANIMATIONS ===== */
