@@ -913,6 +913,8 @@
     transition: transform 0.3s;
   }
   .ugc-slide:hover { transform: translateY(-4px); cursor: pointer; }
+  .ugc-slide:nth-child(even) { transform: translateY(-40px); }
+  .ugc-slide:nth-child(even):hover { transform: translateY(-44px); }
   .ugc-slide.playing .ugc-slide-play { display: none; }
   .ugc-slide.playing .ugc-slide-sound { display: none; }
   .ugc-slide.playing::after {
