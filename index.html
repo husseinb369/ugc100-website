@@ -300,15 +300,17 @@
   .hero-bg-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(247,247,247,0.3) 0%, rgba(247,247,247,0.7) 35%, rgba(247,247,247,0.95) 65%);
+    background: linear-gradient(180deg, rgba(247,247,247,0.15) 0%, rgba(247,247,247,0.5) 40%, rgba(247,247,247,0.9) 75%);
     pointer-events: none;
     z-index: 1;
   }
   .hero .ugc-slider-wrap,
   .hero .hero-mockup { position: relative; z-index: 5; }
   @media (max-width: 640px) {
-    .hero-bg-marquee { display: none; }
-    .hero-bg-overlay { display: none; }
+    .hero-bg-marquee { top: -40px; left: -40px; right: -40px; gap: 8px; opacity: 0.35; }
+    .hero-marquee-row img { width: 80px; border-radius: 8px; }
+    .hero-marquee-row { gap: 8px; }
+    .hero-bg-overlay { background: linear-gradient(180deg, rgba(247,247,247,0.1) 0%, rgba(247,247,247,0.4) 40%, rgba(247,247,247,0.85) 70%); }
   }
 
   /* ===== DASHBOARD MOCKUP (1:1 Framer) ===== */
