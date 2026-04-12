@@ -892,7 +892,7 @@
     display: flex;
     gap: 16px;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
     padding: 0 40px;
     scrollbar-width: none;
@@ -2548,11 +2548,16 @@ document.querySelectorAll('.ugc-slide').forEach(slide => {
 // Drag to scroll for slider
 const slider = document.querySelector('.ugc-slider');
 if (slider) {
-  let isDown = false, startX, scrollLeft;
-  slider.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
-  slider.addEventListener('mouseleave', () => isDown = false);
-  slider.addEventListener('mouseup', () => isDown = false);
-  slider.addEventListener('mousemove', e => { if (!isDown) return; e.preventDefault(); slider.scrollLeft = scrollLeft - (e.pageX - slider.offsetLeft - startX) * 1.5; });
+  let isDown = false, startX, scrollLeft, hasDragged = false;
+  slider.addEventListener('mousedown', e => { isDown = true; hasDragged = false; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
+  slider.addEventListener('mouseleave', () => { isDown = false; });
+  slider.addEventListener('mouseup', () => { isDown = false; });
+  slider.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    const dx = Math.abs(e.pageX - slider.offsetLeft - startX);
+    if (dx > 5) { hasDragged = true; e.preventDefault(); }
+    if (hasDragged) slider.scrollLeft = scrollLeft - (e.pageX - slider.offsetLeft - startX) * 1.5;
+  });
 }
 
 function toggleFaq(btn) {
