@@ -1422,10 +1422,9 @@
   /* ===== RESPONSIVE ===== */
   /* ===== TABLET ===== */
   @media (max-width: 1024px) {
-    .mockup-inner { height: 340px; }
+    .mockup-inner { height: 400px; }
     .mock-stat-row { grid-template-columns: repeat(3, 1fr); }
-    .mock-bottom-row { grid-template-columns: 1fr; }
-    .mock-clients-card { display: none; }
+    .mock-bottom-row { grid-template-columns: 1.2fr 1fr; }
     .value-grid { grid-template-columns: 1fr; }
     .features-grid { grid-template-columns: 1fr 1fr; }
     .reviews-grid, .blog-grid { grid-template-columns: 1fr; }
@@ -1463,22 +1462,29 @@
 
     /* Dashboard mockup */
     .hero-mockup { margin-top: 48px; }
-    .mockup-inner { height: 380px; }
-    .mock-sidebar { width: 120px; padding: 16px 8px; }
-    .mock-sidebar-logo { font-size: 11px; margin-bottom: 10px; padding: 4px 8px; }
-    .mock-sidebar-logo img { width: 14px; height: 14px; }
-    .mock-nav-item { font-size: 10px; padding: 6px 8px; gap: 6px; }
+    .mockup-inner { height: auto; min-height: 320px; }
+    .mock-sidebar { width: 100px; padding: 12px 6px; }
+    .mock-sidebar-logo { font-size: 10px; margin-bottom: 8px; padding: 4px 6px; }
+    .mock-sidebar-logo img { width: 12px; height: 12px; }
+    .mock-nav-item { font-size: 9px; padding: 5px 6px; gap: 4px; }
+    .mock-nav-icon { width: 16px; height: 16px; font-size: 7px; }
     .mockup-glow { width: 400px; height: 300px; top: -40px; }
-    .mock-stat-row { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-    .mock-stat-box { padding: 12px; }
-    .mock-stat-box .stat-value { font-size: 18px; }
-    .mock-stat-box .stat-title { font-size: 9px; }
-    .mock-stat-box .stat-change { font-size: 9px; }
-    .mock-main { padding: 14px; gap: 8px; }
-    .mock-big-number .num { font-size: 20px; }
-    .mock-chart-header .chart-title { font-size: 10px; }
-    .mock-chart-toggle span { font-size: 8px; padding: 3px 6px; }
-    .mock-months span { font-size: 7px; }
+    .mock-stat-row { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+    .mock-stat-box { padding: 8px; }
+    .mock-stat-box .stat-value { font-size: 14px; }
+    .mock-stat-box .stat-title { font-size: 8px; }
+    .mock-stat-box .stat-change { font-size: 8px; }
+    .mock-main { padding: 10px; gap: 6px; }
+    .mock-bottom-row { grid-template-columns: 1.2fr 1fr; gap: 6px; }
+    .mock-big-number .num { font-size: 16px; }
+    .mock-chart-header .chart-title { font-size: 9px; }
+    .mock-chart-toggle span { font-size: 7px; padding: 2px 5px; }
+    .mock-months span { font-size: 6px; }
+    .mock-clients-card { padding: 10px; gap: 6px; }
+    .mock-clients-card .clients-title { font-size: 9px; }
+    .mock-client-icon { width: 18px; height: 18px; font-size: 8px; }
+    .mock-client-name { font-size: 9px; }
+    .mock-client-views { font-size: 8px; }
 
     /* Sections */
     .section-label h2 { font-size: 24px; letter-spacing: -1px; }
@@ -1805,7 +1811,7 @@
     <div class="section-label">
       <div class="badge"><span class="dot"></span> Why UGC100</div>
       <h2><span style="color:var(--accent)">$4.77</span> per video vs $200 <span class="mobile-break"></span>at an agency</h2>
-      <p style="text-align:left;width:100%">You do the math.</p>
+      <p>You do the math.</p>
     </div>
     <div class="comparison-wrapper">
       <table class="comparison-table">
@@ -2526,7 +2532,7 @@ const autoSlider = document.querySelector('.ugc-slider');
 if (autoSlider) {
   let autoDir = 1;
   setInterval(() => {
-    autoSlider.scrollLeft += autoDir * 2;
+    autoSlider.scrollLeft += autoDir * 1;
     if (autoSlider.scrollLeft >= autoSlider.scrollWidth - autoSlider.clientWidth) autoDir = -1;
     if (autoSlider.scrollLeft <= 0) autoDir = 1;
   }, 16);
