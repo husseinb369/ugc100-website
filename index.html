@@ -268,6 +268,25 @@
   .btn-accent { background: var(--accent-gradient); color: #ffffff; box-shadow: 0 4px 20px rgba(26,153,96,0.25); }
   .btn-accent:hover { filter: brightness(1.1); box-shadow: 0 8px 30px rgba(26,153,96,0.35); transform: translateY(-2px); }
 
+  /* Social proof bar */
+  .proof-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 48px;
+    padding: 16px 32px;
+    border-radius: var(--r-pill);
+    background: rgba(0,0,0,0.04);
+    border: 1px solid var(--border);
+    position: relative;
+    z-index: 5;
+    flex-wrap: wrap;
+  }
+  .proof-item { font-size: 14px; color: var(--gray); font-weight: 500; white-space: nowrap; }
+  .proof-num { color: var(--white); font-weight: 700; }
+  .proof-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--gray); opacity: 0.4; }
+
   .badge {
     display: inline-flex;
     align-items: center;
@@ -1524,6 +1543,9 @@
     .hero h1 .highlight { padding: 0 8px; border-radius: 6px; }
     .hero .subtitle { max-width: 100%; font-size: 15px; line-height: 22px; margin-bottom: 20px; }
     .hero-ctas { flex-direction: column; align-items: center; }
+    .proof-bar { gap: 12px; padding: 12px 20px; border-radius: 16px; margin-top: 32px; }
+    .proof-item { font-size: 12px; }
+    .proof-sep { display: none; }
     .btn-cta-arrow { padding: 12px 22px 12px 24px; font-size: 14px; }
     .btn-cta-arrow .arrow { width: 22px; height: 22px; font-size: 11px; }
     .badge { font-size: 11px; padding: 4px 10px; }
@@ -1738,6 +1760,7 @@
     <a href="#features">Features</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
+    <a href="#pricing" class="nav-cta" style="background:transparent;color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.15)">Book a Demo</a>
     <a href="https://app.ugc100.com/signup" class="nav-cta">Get Started</a>
   </div>
 </nav>
@@ -1765,9 +1788,10 @@
   <div class="hero-inner">
     <div class="badge"><span class="dot"></span> Built from real operations</div>
     <h1 style="white-space:nowrap">The AI <span class="highlight">system</span> that runs<br>your entire <span class="highlight">social media</span></h1>
-    <p class="subtitle">AI-driven UGC creation and publishing.<br>Scale your content without the chaos.</p>
+    <p class="subtitle">Stop paying $200 per video. Stop waiting weeks for content.<br>Generate, edit, and post UGC at scale — from $4.77/video.</p>
     <div class="hero-ctas">
       <a href="https://app.ugc100.com/signup" class="btn btn-cta-arrow">Get started <span class="arrow">&rarr;</span></a>
+      <a href="#pricing" class="btn btn-ghost" onclick="switchPricing('managed',document.querySelector('.pricing-toggle button:last-child'))">Book a demo</a>
     </div>
   </div>
 
@@ -1788,6 +1812,15 @@
       <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero12.webp" alt="AI-generated UGC city walk video"><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero13.webp" alt="AI-generated UGC pool video"><div class="ugc-slide-play"></div><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
     </div>
+  </div>
+
+  <!-- Social proof bar -->
+  <div class="proof-bar">
+    <div class="proof-item"><span class="proof-num">40M+</span> followers managed</div>
+    <div class="proof-sep"></div>
+    <div class="proof-item"><span class="proof-num">2B+</span> monthly views</div>
+    <div class="proof-sep"></div>
+    <div class="proof-item">Trusted by <a href="https://www.travly.com" target="_blank" rel="noopener" class="proof-num" style="text-decoration:none;color:var(--white)">Travly</a></div>
   </div>
 
   <!-- Dashboard mockup: 1:1 Framer -->
@@ -1910,6 +1943,48 @@
     </div>
   </div>
 </section>
+
+<!-- SOCIAL PROOF / CASE STUDY -->
+<section>
+  <img src="logo.png" class="chameleon-wm" alt="" loading="lazy" style="width:350px;height:350px;top:40px;left:-80px;">
+  <div class="container">
+    <div class="section-label">
+      <div class="badge"><span class="dot"></span> Case Study</div>
+      <h2>Powering the world's largest <span style="color:var(--accent)">media networks</span></h2>
+      <p>See how UGC100 powers Travly's content engine across 40M+ followers and 2B+ monthly views.</p>
+    </div>
+    <div class="scale-section">
+      <div class="scale-inner">
+        <div class="scale-content">
+          <span class="scale-badge">Travly &middot; Live Client</span>
+          <h3>40M+ followers managed from one pipeline</h3>
+          <p>Travly runs 45+ travel accounts with 40M followers and 2B monthly views. From @india (8.3M) to @hotels (2M), @destination (2M) to @iceland (2M). All content through UGC100.</p>
+        </div>
+        <div class="scale-visual">
+          <div class="scale-stats">
+            <div class="scale-stat"><span class="num">40M+</span><span class="lbl">Followers</span></div>
+            <div class="scale-stat"><span class="num">2B+</span><span class="lbl">Monthly Views</span></div>
+            <div class="scale-stat"><span class="num">45+</span><span class="lbl">Managed Accounts</span></div>
+            <div class="scale-stat"><span class="num">762M</span><span class="lbl">Top Page Views</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="case-showcase">
+      <div class="case-card wide"><img src="travly-assets/webp/page-network-03.webp" alt="Travly Network: 40M+ followers, 2B+ monthly views" loading="lazy"></div>
+      <div class="case-card"><img src="travly-assets/webp/page-ig-07.webp" alt="Travly Instagram accounts" loading="lazy"></div>
+      <div class="case-card"><img src="travly-assets/webp/page-ig-08.webp" alt="Travly Instagram country pages" loading="lazy"></div>
+      <div class="case-card"><img src="travly-assets/webp/page-tt-09.webp" alt="Travly TikTok accounts" loading="lazy"></div>
+      <div class="case-card"><img src="travly-assets/webp/img-050.webp" alt="@india Instagram profile: 8.2M followers, 763M views" loading="lazy" style="max-height:360px;object-fit:cover;object-position:top"></div>
+      <div class="case-card wide"><img src="travly-assets/webp/page4-04.webp" alt="Top performing page insights: @india 762M views" loading="lazy"></div>
+      <div class="case-card wide"><img src="travly-assets/webp/travly-celebs.webp" alt="Celebrities that follow Travly: J Balvin, Conor McGregor, DJ Khaled, Joe Rogan, Gordon Ramsay" loading="lazy"></div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="https://app.ugc100.com/signup" class="btn btn-accent">Get started &rarr;</a>
+    </div>
+  </div>
+</section>
+
 
 <!-- OUR PIPELINE -->
 <section>
@@ -2484,49 +2559,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div style="text-align:center;margin-top:40px">
-      <a href="https://app.ugc100.com/signup" class="btn btn-accent">Get started &rarr;</a>
-    </div>
-  </div>
-</section>
-
-
-<!-- SOCIAL PROOF / CASE STUDY -->
-<section>
-  <img src="logo.png" class="chameleon-wm" alt="" loading="lazy" style="width:350px;height:350px;top:40px;left:-80px;">
-  <div class="container">
-    <div class="section-label">
-      <div class="badge"><span class="dot"></span> Case Study</div>
-      <h2>Powering the world's largest <span style="color:var(--accent)">media networks</span></h2>
-      <p>See how UGC100 powers Travly's content engine across 40M+ followers and 2B+ monthly views.</p>
-    </div>
-    <div class="scale-section">
-      <div class="scale-inner">
-        <div class="scale-content">
-          <span class="scale-badge">Travly &middot; Live Client</span>
-          <h3>40M+ followers managed from one pipeline</h3>
-          <p>Travly runs 45+ travel accounts with 40M followers and 2B monthly views. From @india (8.3M) to @hotels (2M), @destination (2M) to @iceland (2M). All content through UGC100.</p>
-        </div>
-        <div class="scale-visual">
-          <div class="scale-stats">
-            <div class="scale-stat"><span class="num">40M+</span><span class="lbl">Followers</span></div>
-            <div class="scale-stat"><span class="num">2B+</span><span class="lbl">Monthly Views</span></div>
-            <div class="scale-stat"><span class="num">45+</span><span class="lbl">Managed Accounts</span></div>
-            <div class="scale-stat"><span class="num">762M</span><span class="lbl">Top Page Views</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Visual showcase -->
-    <div class="case-showcase">
-      <div class="case-card wide"><img src="travly-assets/webp/page-network-03.webp" alt="Travly Network: 40M+ followers, 2B+ monthly views" loading="lazy"></div>
-      <div class="case-card"><img src="travly-assets/webp/page-ig-07.webp" alt="Travly Instagram accounts" loading="lazy"></div>
-      <div class="case-card"><img src="travly-assets/webp/page-ig-08.webp" alt="Travly Instagram country pages" loading="lazy"></div>
-      <div class="case-card"><img src="travly-assets/webp/page-tt-09.webp" alt="Travly TikTok accounts" loading="lazy"></div>
-      <div class="case-card"><img src="travly-assets/webp/img-050.webp" alt="@india Instagram profile: 8.2M followers, 763M views" loading="lazy" style="max-height:360px;object-fit:cover;object-position:top"></div>
-      <div class="case-card wide"><img src="travly-assets/webp/page4-04.webp" alt="Top performing page insights: @india 762M views" loading="lazy"></div>
-      <div class="case-card wide"><img src="travly-assets/webp/travly-celebs.webp" alt="Celebrities that follow Travly: J Balvin, Conor McGregor, DJ Khaled, Joe Rogan, Gordon Ramsay" loading="lazy"></div>
     </div>
     <div style="text-align:center;margin-top:40px">
       <a href="https://app.ugc100.com/signup" class="btn btn-accent">Get started &rarr;</a>
