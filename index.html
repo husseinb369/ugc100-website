@@ -891,19 +891,15 @@
   .ugc-slider {
     display: flex;
     gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
     padding: 0 40px;
     scrollbar-width: none;
-    cursor: grab;
   }
   .ugc-slider::-webkit-scrollbar { display: none; }
-  .ugc-slider:active { cursor: grabbing; }
   .ugc-slide {
     flex-shrink: 0;
     width: 220px;
-    scroll-snap-align: start;
+    pointer-events: none;
     border-radius: 16px;
     overflow: hidden;
     position: relative;
@@ -2530,34 +2526,6 @@ if (autoSlider) {
     if (autoSlider.scrollLeft >= autoSlider.scrollWidth - autoSlider.clientWidth) autoDir = -1;
     if (autoSlider.scrollLeft <= 0) autoDir = 1;
   }, 16);
-  autoSlider.addEventListener('mousedown', () => autoDir = 0);
-  autoSlider.addEventListener('touchstart', () => autoDir = 0);
-  autoSlider.addEventListener('mouseup', () => { setTimeout(() => autoDir = 1, 3000); });
-  autoSlider.addEventListener('touchend', () => { setTimeout(() => autoDir = 1, 3000); });
-}
-
-// Slide play toggle
-document.querySelectorAll('.ugc-slide').forEach(slide => {
-  slide.addEventListener('click', () => {
-    const wasPlaying = slide.classList.contains('playing');
-    document.querySelectorAll('.ugc-slide.playing').forEach(s => s.classList.remove('playing'));
-    if (!wasPlaying) slide.classList.add('playing');
-  });
-});
-
-// Drag to scroll for slider
-const slider = document.querySelector('.ugc-slider');
-if (slider) {
-  let isDown = false, startX, scrollLeft, hasDragged = false;
-  slider.addEventListener('mousedown', e => { isDown = true; hasDragged = false; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
-  slider.addEventListener('mouseleave', () => { isDown = false; });
-  slider.addEventListener('mouseup', () => { isDown = false; });
-  slider.addEventListener('mousemove', e => {
-    if (!isDown) return;
-    const dx = Math.abs(e.pageX - slider.offsetLeft - startX);
-    if (dx > 5) { hasDragged = true; e.preventDefault(); }
-    if (hasDragged) slider.scrollLeft = scrollLeft - (e.pageX - slider.offsetLeft - startX) * 1.5;
-  });
 }
 
 function toggleFaq(btn) {
