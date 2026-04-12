@@ -1503,31 +1503,32 @@
     .usp-visual { min-height: 240px; padding: 20px 16px; }
     .usp-visual [style*="grid-template-columns: 1fr 1fr 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; }
 
-    /* Comparison table - stack on mobile */
+    /* Comparison table - fully stacked on mobile */
     .comparison-wrapper { border-radius: var(--r-md); overflow: hidden; }
     .comparison-table { min-width: 0; font-size: 13px; }
     .comparison-table thead { display: none; }
-    .comparison-table .mobile-header { display: grid; }
+    .comparison-table .mobile-header { display: none; }
     .comparison-table tbody tr {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 0;
-      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 16px;
       border-bottom: 1px solid var(--border);
     }
-    .comparison-table td { padding: 0; text-align: left; border: none; }
+    .comparison-table td { padding: 0; text-align: left; border: none; display: flex; justify-content: space-between; font-size: 13px; }
     .comparison-table td:first-child {
-      grid-column: 1 / -1;
-      text-align: left;
       font-weight: 600;
       color: var(--white);
-      margin-bottom: 8px;
-      font-size: 13px;
+      margin-bottom: 4px;
+      font-size: 14px;
     }
-    .comparison-table .accent-val { font-size: 12px; }
-    .comparison-table .dim, .comparison-table .dim-italic { font-size: 11px; }
-    .comparison-table .mobile-header td:first-child { display: none; }
-    .comparison-table .mobile-header { background: var(--surface); padding: 10px 16px; position: sticky; top: 0; }
+    .comparison-table td.dim::before,
+    .comparison-table td.dim-italic::before,
+    .comparison-table td.accent-val::before { font-size: 11px; color: var(--gray); font-style: normal; }
+    .comparison-table tbody tr td:nth-child(2)::before { content: "Agency: "; }
+    .comparison-table tbody tr td:nth-child(3)::before { content: "Freelancer: "; }
+    .comparison-table tbody tr td:nth-child(4)::before { content: "UGC100: "; }
+    .comparison-table .accent-val::before { color: var(--accent) !important; }
 
     /* Scale section */
     .scale-content { padding: 32px 20px; }
@@ -1562,8 +1563,10 @@
     .pricing-toggle button { padding: 8px 16px; font-size: 13px; }
 
     /* Pipeline flow */
-    .pipe-flow { padding: 20px 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .pipe-flow-inner { min-width: 600px; }
+    .pipe-flow { padding: 20px 12px; overflow: hidden; }
+    .pipe-flow-inner { min-width: 0; flex-direction: column; gap: 24px; }
+    .pipe-flow-step { flex-direction: column; }
+    .pipe-flow-arrow { transform: rotate(90deg); padding: 8px 0; }
     .pipe-flow-num { font-size: 28px; }
     .pipe-flow-title { font-size: 13px; }
     .pipe-flow-icon { width: 28px; height: 28px; font-size: 12px; }
