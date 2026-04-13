@@ -46,4 +46,4 @@ Vercel project: `ugc100-website` | GitHub: `husseinb369/ugc100-website` | Live: 
 - **Gamelancer:** 40M+ followers, 54 channels. Top: @gaming 10.2M, @gamelancer 4.9M, @callofdutygamelancer 1.3M
 
 **Pricing (Self-Service):** Starter $47/mo, Growth $147/mo, Scale $297/mo
-**Pricing (Managed Pipeline):** Growth $4,400/mo, Business $8,900/mo, Scale $14,300/mo, Enterprise Custom
+**Pricing (Managed Pipeline):** Growth $6,200/mo, Business $11,900/mo, Scale $19,700/mo, Enterprise Custom
