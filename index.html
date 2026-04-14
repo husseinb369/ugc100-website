@@ -925,12 +925,6 @@
   .pf-status.approved { color: #10b981; }
   .pf-status.posted { color: #10b981; }
   .pf-status.scheduled { color: #f59e0b; }
-  @media (max-width: 640px) {
-    .pipe-flow { padding: 24px 16px; }
-    .pipe-flow-inner { min-width: 700px; }
-    .pipe-flow-num { font-size: 36px; }
-  }
-
   /* ===== UGC SLIDER ===== */
   .ugc-slider-wrap {
     overflow: hidden;
@@ -1708,14 +1702,14 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
     .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 
-    /* Watermarks on mobile - scale down and keep inside viewport */
+    /* Watermarks hidden on mobile — they overflow and look broken */
     .chameleon-wm {
-      max-width: 180px !important;
-      max-height: 180px !important;
-      left: auto !important;
-      right: -20px !important;
-      transform: none !important;
+      display: none !important;
     }
+
+    /* Slider slides: reduce stagger offset for smaller screens */
+    .ugc-slide:nth-child(odd) { transform: translateY(18px); }
+    .ugc-slide:nth-child(odd):hover { transform: translateY(14px); }
 
     /* Logo ticker */
     .logo-ticker { gap: 24px; padding: 24px 0; }
@@ -1731,7 +1725,7 @@
     .pricing-amount { font-size: 28px; }
     .section-label h2 { font-size: 22px; }
     .footer-grid { grid-template-columns: 1fr; }
-    .pipe-flow-inner { min-width: 500px; }
+    .pipe-flow-inner { min-width: 0; }
     .ugc-slide { width: 140px; }
     .scale-stats { grid-template-columns: 1fr 1fr; }
     .scale-stat .num { font-size: 28px; }
@@ -2483,17 +2477,17 @@
   </div>
   <div class="ugc-slider-wrap" style="margin-top:32px">
     <div class="ugc-slider ugc-slider-2">
-      <div class="ugc-slide"><video data-src="ugc-video-11.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video data-src="ugc-video-2.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video data-src="ugc-video-4.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video data-src="ugc-video-6.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video data-src="ugc-video-1.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video data-src="ugc-video-7.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-10.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-9.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-8.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-7.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-6.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-5.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-4.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video data-src="ugc-video-11.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-3.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-2.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-1.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video data-src="ugc-video-5.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video data-src="ugc-video-8.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
     </div>
   </div>
 </section>
