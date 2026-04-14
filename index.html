@@ -810,7 +810,7 @@
   .scale-stat .lbl { font-size: 14px; color: var(--gray); }
 
   /* ===== CASE STUDY SHOWCASE ===== */
-  .case-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+  .case-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; max-width: 900px; margin-left: auto; margin-right: auto; }
   .case-card {
     border-radius: var(--r-md);
     overflow: hidden;
@@ -1314,7 +1314,7 @@
 
   /* ===== FEATURES GRID ===== */
   .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; position: relative; z-index: 1; }
-  .feature-card { border: 1px solid var(--border); border-radius: var(--r-md); padding: 40px; display: flex; flex-direction: column; gap: 16px; transition: border-color 0.3s; }
+  .feature-card { border: 1px solid var(--border); border-radius: var(--r-md); padding: 40px; display: flex; flex-direction: column; gap: 16px; transition: border-color 0.3s; background: linear-gradient(135deg, rgba(26,153,96,0.06), rgba(52,211,153,0.04), transparent); }
   .feature-card:hover { border-color: var(--border-hover); }
   .feature-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; font-size: 18px; }
   .feature-card h3 { font-size: 18px; font-weight: 500; color: var(--white); line-height: 1.3; }
@@ -1893,7 +1893,7 @@
             <div class="mock-clients-card">
               <span class="clients-title">Top Accounts — Followers</span>
               <div class="mock-client-row"><span class="mock-client-name">@gaming</span><span class="mock-client-views">10.2M</span></div>
-              <div class="mock-client-row"><span class="mock-client-name">@india</span><span class="mock-client-views">8.3M</span></div>
+              <div class="mock-client-row"><span class="mock-client-name">@zakugc</span><span class="mock-client-views">8.3M</span></div>
               <div class="mock-client-row"><span class="mock-client-name">@gamelancer</span><span class="mock-client-views">4.9M</span></div>
               <div class="mock-client-row"><span class="mock-client-name">@hotels</span><span class="mock-client-views">2.0M</span></div>
               <div class="mock-client-row"><span class="mock-client-name">@destination</span><span class="mock-client-views">2.0M</span></div>
@@ -1954,7 +1954,7 @@
         <div class="scale-content">
           <span class="scale-badge">Travly &middot; Live Client</span>
           <h3>40M+ followers managed from one pipeline</h3>
-          <p>Travly runs 45+ travel accounts with 40M followers and 2B monthly views. From @india (8.3M) to @hotels (2M), @destination (2M) to @iceland (2M). All content through UGC100.</p>
+          <p>Travly runs 45+ travel accounts with 40M followers and 2B monthly views. From @hotels (2M) to @destination (2M), @iceland (2M) to @travel (1.4M). All content through UGC100.</p>
         </div>
         <div class="scale-visual">
           <div class="scale-stats">
@@ -2032,9 +2032,9 @@
               <span class="pipe-flow-title">Auto-Post</span>
             </div>
             <div class="pipe-flow-items">
-              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero13.webp" class="pipe-flow-thumb" loading="lazy"><div><span class="pf-name">Pool day vlog</span><span class="pf-status posted">@hotels &middot; Posted</span></div></div>
-              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero9.webp" class="pipe-flow-thumb" loading="lazy"><div><span class="pf-name">Couple city walk</span><span class="pf-status posted">@destination &middot; Posted</span></div></div>
-              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero7.webp" class="pipe-flow-thumb" loading="lazy"><div><span class="pf-name">Yoga in nature</span><span class="pf-status scheduled">@iceland &middot; 3pm</span></div></div>
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero13.webp" class="pipe-flow-thumb" loading="lazy"><div><span class="pf-name">Pool day vlog</span><span class="pf-status posted">@zakugc &middot; Posted</span></div></div>
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero9.webp" class="pipe-flow-thumb" loading="lazy"><div><span class="pf-name">Couple city walk</span><span class="pf-status posted">@dennisandmaya &middot; Posted</span></div></div>
+              <div class="pipe-flow-item"><img src="https://pub-829011bc778a48a7880c8a27fea4c863.r2.dev/hero7.webp" class="pipe-flow-thumb" loading="lazy"><div><span class="pf-name">Yoga in nature</span><span class="pf-status scheduled">@laurenwanders &middot; 3pm</span></div></div>
             </div>
           </div>
         </div>
@@ -2192,7 +2192,7 @@
     </div>
     <div class="logo-ticker">
       <span>@gaming &middot; 10.2M</span>
-      <span>@india &middot; 8.3M</span>
+      <span>@zakugc &middot; 8.3M</span>
       <span>@gamelancer &middot; 4.9M</span>
       <span>@hotels &middot; 2M</span>
       <span>@destination &middot; 2M</span>
@@ -2471,6 +2471,26 @@
   </div>
 </section>
 
+<!-- UGC Video Showcase -->
+<section>
+  <div class="container">
+    <div class="section-label">
+      <h2>See what <span style="color:var(--accent)">UGC100</span> creates</h2>
+    </div>
+  </div>
+  <div class="ugc-slider-wrap" style="margin-top:32px">
+    <div class="ugc-slider ugc-slider-2">
+      <div class="ugc-slide"><video src="ugc-video-1.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video src="ugc-video-2.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video src="ugc-video-3.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video src="ugc-video-5.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video src="ugc-video-7.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video src="ugc-video-8.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video src="ugc-video-9.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide"><video src="ugc-video-10.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+    </div>
+  </div>
+</section>
 
 <!-- FAQ -->
 <section id="faq">
@@ -2605,16 +2625,16 @@
 </footer>
 
 <script>
-// Auto-scroll slider
-const autoSlider = document.querySelector('.ugc-slider');
-if (autoSlider) {
-  let autoDir = 1;
+// Auto-scroll sliders
+document.querySelectorAll('.ugc-slider').forEach((slider, i) => {
+  let dir = i % 2 === 0 ? 1 : -1;
+  if (dir === -1) slider.scrollLeft = slider.scrollWidth;
   setInterval(() => {
-    autoSlider.scrollLeft += autoDir * 1;
-    if (autoSlider.scrollLeft >= autoSlider.scrollWidth - autoSlider.clientWidth) autoDir = -1;
-    if (autoSlider.scrollLeft <= 0) autoDir = 1;
+    slider.scrollLeft += dir * 1;
+    if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) dir = -1;
+    if (slider.scrollLeft <= 0) dir = 1;
   }, 16);
-}
+});
 
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
