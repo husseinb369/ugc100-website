@@ -1748,7 +1748,10 @@
     position: fixed;
     inset: 0;
     z-index: 99999;
-    background: #f7f7f7;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(26,153,96,0.18), transparent 55%),
+      radial-gradient(circle at 80% 80%, rgba(94,232,183,0.22), transparent 55%),
+      radial-gradient(circle at 50% 50%, #ffffff, #f0f0f0);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1761,17 +1764,17 @@
   .intro-overlay.skip,
   .intro-overlay.removed { display: none; }
   .intro-logo {
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 200px;
     opacity: 0;
     transform: scale(0.9);
     animation: introLogoIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s forwards;
   }
   .intro-wordmark {
     font-family: inherit;
-    font-size: 42px;
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
     color: #0a0a0a;
     opacity: 0;
     transform: translateY(6px);
@@ -1780,8 +1783,8 @@
   @keyframes introLogoIn { to { opacity: 1; transform: scale(1); } }
   @keyframes introWordIn { to { opacity: 1; transform: translateY(0); } }
   @media (max-width: 640px) {
-    .intro-logo { width: 88px; height: 88px; }
-    .intro-wordmark { font-size: 32px; }
+    .intro-logo { width: 150px; height: 150px; }
+    .intro-wordmark { font-size: 22px; }
   }
 </style>
 </head>
