@@ -1742,9 +1742,71 @@
   .hero .subtitle { animation-delay: 0.2s; opacity: 0; }
   .hero-ctas { animation-delay: 0.3s; opacity: 0; }
   .hero-mockup { animation-delay: 0.5s; opacity: 0; }
+
+  /* Intro overlay */
+  .intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 22px;
+    opacity: 1;
+    transition: opacity 0.45s ease;
+  }
+  .intro-overlay.hidden { opacity: 0; pointer-events: none; }
+  .intro-overlay.skip,
+  .intro-overlay.removed { display: none; }
+  .intro-logo {
+    width: 120px;
+    height: 120px;
+    opacity: 0;
+    transform: scale(0.9);
+    animation: introLogoIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s forwards;
+  }
+  .intro-wordmark {
+    font-family: inherit;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #0a0a0a;
+    opacity: 0;
+    transform: translateY(6px);
+    animation: introWordIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.22s forwards;
+  }
+  @keyframes introLogoIn { to { opacity: 1; transform: scale(1); } }
+  @keyframes introWordIn { to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 640px) {
+    .intro-logo { width: 88px; height: 88px; }
+    .intro-wordmark { font-size: 32px; }
+  }
 </style>
 </head>
 <body>
+<div class="intro-overlay" id="introOverlay" aria-hidden="true">
+  <img src="logo.png" alt="" class="intro-logo">
+  <div class="intro-wordmark">UGC100</div>
+</div>
+<script>
+  (function(){
+    var overlay = document.getElementById('introOverlay');
+    if (!overlay) return;
+    try {
+      if (sessionStorage.getItem('ugc100_intro_shown')) {
+        overlay.classList.add('skip');
+        return;
+      }
+      sessionStorage.setItem('ugc100_intro_shown', '1');
+    } catch(e) {}
+    setTimeout(function(){
+      overlay.classList.add('hidden');
+      setTimeout(function(){ overlay.classList.add('removed'); }, 500);
+    }, 1050);
+  })();
+</script>
 
 <!-- NAV -->
 <a href="/" class="nav-logo">
