@@ -1559,29 +1559,34 @@
     .mock-nav-icon { width: 16px; height: 16px; font-size: 7px; }
     .mockup-glow { width: 400px; height: 300px; top: -40px; }
     .mock-stat-row { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-    .mock-stat-box { padding: 8px; display: flex; flex-direction: column; justify-content: flex-start; }
-    .mock-stat-box .stat-value { font-size: 14px; }
-    .mock-stat-box .stat-row { gap: 4px; min-height: 18px; align-items: center; }
-    .mock-stat-box .stat-title { font-size: 8px; line-height: 1; }
-    .mock-stat-box .stat-change { font-size: 8px; }
-    .mock-main { padding: 10px; gap: 8px; }
+    .mock-stat-box { padding: 8px 6px; display: flex; flex-direction: column; justify-content: flex-start; gap: 4px; }
+    .mock-stat-box .stat-value { font-size: 13px; letter-spacing: -0.5px; }
+    .mock-stat-box .stat-row { gap: 3px; display: flex; align-items: baseline; flex-wrap: nowrap; }
+    .mock-stat-box .stat-title { font-size: 7px; line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mock-stat-box .stat-change { font-size: 7px; white-space: nowrap; }
+    .mock-main { padding: 8px; gap: 6px; }
     .mock-bottom-row { grid-template-columns: 1.2fr 1fr; gap: 6px; }
-    .mock-big-number .num { font-size: 16px; }
-    .mock-chart-header { gap: 6px; }
-    .mock-chart-header .chart-title { font-size: 10px; }
-    .mock-chart-toggle span { font-size: 8px; padding: 3px 6px; }
+    .mock-big-number .num { font-size: 14px; }
+    .mock-big-number .indicator { width: 5px; height: 5px; }
+    .mock-big-number { gap: 4px; }
+    .mock-chart-area { padding: 10px; gap: 6px; }
+    .mock-chart-header { gap: 4px; flex-wrap: nowrap; }
+    .mock-chart-header .chart-title { font-size: 9px; white-space: nowrap; flex-shrink: 0; }
+    .mock-chart-toggle { padding: 1px; gap: 0; }
+    .mock-chart-toggle span { font-size: 7px; padding: 2px 4px; white-space: nowrap; }
     .mock-months span { font-size: 6px; }
-    .mock-clients-card { padding: 10px; gap: 6px; }
-    .mock-clients-card .clients-title { font-size: 9px; }
-    .mock-client-icon { width: 18px; height: 18px; font-size: 8px; }
-    .mock-client-name { font-size: 9px; }
-    .mock-client-views { font-size: 8px; }
+    .mock-clients-card { padding: 8px; gap: 5px; }
+    .mock-clients-card .clients-title { font-size: 8px; }
+    .mock-client-row { gap: 6px; }
+    .mock-client-icon { width: 16px; height: 16px; font-size: 7px; }
+    .mock-client-name { font-size: 8px; }
+    .mock-client-views { font-size: 7px; }
 
     /* Sections */
-    .section-label h2 { font-size: 24px; letter-spacing: -1px; }
+    .section-label h2 { font-size: 24px; letter-spacing: -1px; line-height: 1.15; }
     .mobile-break { display: block; }
-    .section-label p { font-size: 16px; line-height: 24px; }
-    .section-label { margin-bottom: 40px; }
+    .section-label p { font-size: 14px; line-height: 22px; }
+    .section-label { margin-bottom: 40px; gap: 12px; }
 
     /* Nav */
     .nav-pill a:not(.nav-cta) { display: none; }
@@ -1642,11 +1647,12 @@
 
     /* Features */
     .features-grid { grid-template-columns: 1fr; }
-    .feature-card { padding: 28px; }
-    .feature-card h3 { font-size: 16px; }
+    .feature-card { padding: 28px; gap: 12px; }
+    .feature-card h3 { font-size: 16px; line-height: 1.3; }
+    .feature-card p { font-size: 13px; line-height: 20px; }
 
     /* Reviews */
-    .review-card { padding: 24px; }
+    .review-card { padding: 24px; gap: 12px; }
     .review-card blockquote { font-size: 14px; line-height: 22px; }
 
     /* FAQ */
@@ -1660,8 +1666,11 @@
     .pricing-card.popular { margin-top: 16px; }
     .pricing-tier { font-size: 20px; }
     .pricing-amount { font-size: 34px; }
-    .pricing-desc { font-size: 13px; }
-    .pricing-features li { font-size: 13px; gap: 8px; }
+    .pricing-desc { font-size: 13px; line-height: 1.4; }
+    .pricing-setup { font-size: 12px; line-height: 1.4; }
+    .pricing-features { gap: 8px; }
+    .pricing-features li { font-size: 13px; gap: 8px; line-height: 1.4; }
+    .pricing-features li .pf-check, .pricing-features li .pf-x { font-size: 14px; flex-shrink: 0; width: 16px; text-align: center; }
     .pricing-card .btn { font-size: 14px; padding: 12px 24px; border-radius: 12px; }
     .pricing-toggle button { padding: 8px 16px; font-size: 13px; }
 
@@ -1726,8 +1735,13 @@
   @media (max-width: 380px) {
     .hero h1 { font-size: 28px; letter-spacing: -1px; }
     .mock-stat-row { grid-template-columns: 1fr 1fr; }
+    .mock-stat-box .stat-title { font-size: 6px; }
+    .mock-stat-box .stat-value { font-size: 12px; }
+    .mock-stat-box .stat-change { font-size: 6px; }
     .mock-sidebar { display: none; }
     .mockup-inner { height: 320px; }
+    .mock-chart-toggle span { font-size: 6px; padding: 2px 3px; }
+    .mock-chart-header .chart-title { font-size: 8px; }
     .pricing-amount { font-size: 28px; }
     .section-label h2 { font-size: 22px; }
     .footer-grid { grid-template-columns: 1fr; }
