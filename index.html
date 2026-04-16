@@ -1559,17 +1559,17 @@
     .mock-nav-icon { width: 16px; height: 16px; font-size: 7px; }
     .mockup-glow { width: 400px; height: 300px; top: -40px; }
     .mock-stat-row { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-    .mock-stat-box { padding: 8px; }
+    .mock-stat-box { padding: 8px; display: flex; flex-direction: column; justify-content: flex-start; }
     .mock-stat-box .stat-value { font-size: 14px; }
-    .mock-stat-box .stat-row { gap: 4px; }
-    .mock-stat-box .stat-title { font-size: 8px; }
+    .mock-stat-box .stat-row { gap: 4px; min-height: 18px; align-items: center; }
+    .mock-stat-box .stat-title { font-size: 8px; line-height: 1; }
     .mock-stat-box .stat-change { font-size: 8px; }
     .mock-main { padding: 10px; gap: 8px; }
     .mock-bottom-row { grid-template-columns: 1.2fr 1fr; gap: 6px; }
     .mock-big-number .num { font-size: 16px; }
-    .mock-chart-header { gap: 8px; }
-    .mock-chart-header .chart-title { font-size: 9px; margin-right: 6px; }
-    .mock-chart-toggle span { font-size: 7px; padding: 2px 6px; }
+    .mock-chart-header { gap: 6px; }
+    .mock-chart-header .chart-title { font-size: 10px; }
+    .mock-chart-toggle span { font-size: 8px; padding: 3px 6px; }
     .mock-months span { font-size: 6px; }
     .mock-clients-card { padding: 10px; gap: 6px; }
     .mock-clients-card .clients-title { font-size: 9px; }
@@ -1585,7 +1585,12 @@
 
     /* Nav */
     .nav-pill a:not(.nav-cta) { display: none; }
-    .nav-pill { padding: 6px 6px 6px 6px; }
+    .nav-pill { padding: 5px; gap: 4px; }
+    .nav-pill .nav-cta { font-size: 12px; padding: 6px 12px; }
+    .nav-logo img { width: 36px; height: 36px; }
+    .nav-logo span { font-size: 14px; }
+    .nav-logo { top: 18px; left: 16px; }
+    nav { top: 14px; right: 12px; }
 
     /* Value cards */
     .value-text { padding: 28px; }
@@ -1948,7 +1953,7 @@
                   <div class="mock-bar-col"><div class="mock-bar" style="height:100%"></div></div>
                 </div>
                 <div class="mock-months">
-                  <span>1</span><span>3</span><span>5</span><span>7</span><span>9</span><span>11</span><span>13</span><span>15</span><span>19</span><span>23</span><span>30</span>
+                  <span>1</span><span>3</span><span>6</span><span>9</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span><span>27</span><span>30</span>
                 </div>
               </div>
             </div>
