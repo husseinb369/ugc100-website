@@ -1806,22 +1806,165 @@
     .intro-wordmark { font-size: 22px; }
   }
 
-  /* ========== LEADERBOARD IMAGE ========== */
-  .leaderboard-image-section {
-    padding: 40px 16px;
+  /* ========== LEADERBOARD ========== */
+  .leaderboard-section {
+    padding: 96px 16px 80px;
+    position: relative;
+  }
+  .leaderboard-wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .leaderboard-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 100px;
+    background: rgba(26,153,96,0.1);
+    border: 1px solid rgba(26,153,96,0.28);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    margin-bottom: 22px;
+  }
+  .leaderboard-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .leaderboard-title {
+    font-family: 'Geist', sans-serif;
+    font-size: clamp(30px, 5.2vw, 54px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #000;
+    margin-bottom: 14px;
+  }
+  .leaderboard-title .accent {
+    display: inline-block;
+    padding: 0 14px;
+    background: linear-gradient(135deg, rgba(26,153,96,0.22), rgba(52,211,153,0.22));
+    border-radius: 14px;
+    color: var(--accent);
+  }
+  .leaderboard-sub {
+    color: var(--gray);
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 520px;
+    margin: 0 auto 44px;
+  }
+  .leaderboard {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 8px;
+    box-shadow: 0 4px 24px -10px rgba(0,0,0,0.06);
+    text-align: left;
+  }
+  .lb-header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-dim);
+  }
+  .lb-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid transparent;
+  }
+  .lb-row + .lb-row { margin-top: 4px; }
+  .lb-row-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+    flex: 1;
+  }
+  .lb-rank {
+    font-family: 'Geist', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-dim);
+    font-variant-numeric: tabular-nums;
+    width: 24px;
+    flex-shrink: 0;
+  }
+  .lb-medal {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    font-family: 'Geist', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    flex-shrink: 0;
+    background: rgba(0,0,0,0.05);
+    color: var(--gray);
   }
-  .leaderboard-image-section img {
-    display: block;
-    width: 100%;
-    max-width: 1180px;
-    height: auto;
-    border-radius: 24px;
+  .lb-name {
+    font-family: 'Geist', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+  .lb-price {
+    font-family: 'Geist', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--gray);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    padding-left: 12px;
+  }
+  .lb-row.winner {
+    background: linear-gradient(180deg, rgba(26,153,96,0.06), rgba(26,153,96,0.02));
+    border-color: rgba(26,153,96,0.3);
+    box-shadow: 0 10px 28px -14px rgba(26,153,96,0.3);
+  }
+  .lb-row.winner .lb-rank { color: var(--accent); font-weight: 600; }
+  .lb-row.winner .lb-name { font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
+  .lb-row.winner .lb-price {
+    color: var(--accent);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .lb-row.winner .lb-medal {
+    background: linear-gradient(135deg, var(--accent), var(--accent-bright));
+    color: #fff;
+    box-shadow: 0 0 0 5px rgba(26,153,96,0.14), 0 6px 16px -4px rgba(26,153,96,0.4);
+  }
+
   @media (max-width: 640px) {
-    .leaderboard-image-section { padding: 24px 12px; }
-    .leaderboard-image-section img { border-radius: 16px; }
+    .leaderboard-section { padding: 64px 12px 56px; }
+    .leaderboard-title .accent { padding: 0 8px; }
+    .leaderboard { padding: 6px; border-radius: 16px; }
+    .lb-header { padding: 12px 14px 8px; font-size: 10px; }
+    .lb-row { padding: 14px; }
+    .lb-row-left { gap: 12px; }
+    .lb-rank { font-size: 12px; width: 18px; }
+    .lb-medal { width: 32px; height: 32px; font-size: 13px; }
+    .lb-name { font-size: 15px; }
+    .lb-price { font-size: 15px; padding-left: 8px; }
+    .lb-row.winner .lb-name { font-size: 16px; }
+    .lb-row.winner .lb-price { font-size: 17px; }
   }
 </style>
 </head>
@@ -2007,9 +2150,44 @@
   </div>
 </section>
 
-<!-- LEADERBOARD (image) -->
-<section class="leaderboard-image-section" id="leaderboard" aria-label="UGC100 price leaderboard">
-  <img src="leaderboard.jpg" alt="UGC100 ranked #1 cheapest UGC at scale — from $9.85 per video, vs AI UGC tools $30–$60 and Traditional Agency $150–$250" loading="lazy">
+<!-- LEADERBOARD: cheapest UGC at scale -->
+<section class="leaderboard-section" id="leaderboard">
+  <div class="leaderboard-wrap">
+    <div class="leaderboard-eyebrow">Price leaderboard</div>
+    <h2 class="leaderboard-title">The <span class="accent">cheapest</span> way to get UGC at scale.</h2>
+    <p class="leaderboard-sub">Ranked cheapest to most expensive per video. We're not close. We're a different category.</p>
+
+    <div class="leaderboard" role="list" aria-label="UGC cost per video leaderboard">
+      <div class="lb-header">
+        <span>Cheapest UGC at scale</span>
+        <span>Cost per video</span>
+      </div>
+      <div class="lb-row winner" role="listitem">
+        <div class="lb-row-left">
+          <span class="lb-rank">01</span>
+          <span class="lb-medal" aria-hidden="true">1</span>
+          <span class="lb-name">UGC100</span>
+        </div>
+        <span class="lb-price">from&nbsp;$9.85</span>
+      </div>
+      <div class="lb-row" role="listitem">
+        <div class="lb-row-left">
+          <span class="lb-rank">02</span>
+          <span class="lb-medal" aria-hidden="true">2</span>
+          <span class="lb-name">AI UGC tools</span>
+        </div>
+        <span class="lb-price">$30&ndash;$60</span>
+      </div>
+      <div class="lb-row" role="listitem">
+        <div class="lb-row-left">
+          <span class="lb-rank">03</span>
+          <span class="lb-medal" aria-hidden="true">3</span>
+          <span class="lb-name">Traditional Agency</span>
+        </div>
+        <span class="lb-price">$150&ndash;$250</span>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- WHY UGC100 -->
