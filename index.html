@@ -1808,13 +1808,26 @@
 
   /* ========== LEADERBOARD ========== */
   .leaderboard-section {
-    padding: 96px 16px 80px;
+    background: #0a0a0a;
+    padding: 104px 16px 96px;
     position: relative;
+    overflow: hidden;
+  }
+  .leaderboard-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 45% at 50% 0%, rgba(26,153,96,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 30% at 50% 55%, rgba(52,211,153,0.08) 0%, transparent 70%);
+    pointer-events: none;
   }
   .leaderboard-wrap {
     max-width: 920px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+    z-index: 1;
   }
   .leaderboard-eyebrow {
     display: inline-flex;
@@ -1822,9 +1835,9 @@
     gap: 8px;
     padding: 6px 14px;
     border-radius: 100px;
-    background: rgba(26,153,96,0.1);
-    border: 1px solid rgba(26,153,96,0.28);
-    color: var(--accent);
+    background: rgba(26,153,96,0.14);
+    border: 1px solid rgba(26,153,96,0.32);
+    color: var(--accent-bright);
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0.01em;
@@ -1833,57 +1846,62 @@
   .leaderboard-eyebrow::before {
     content: '';
     width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent);
+    background: var(--accent-bright);
+    box-shadow: 0 0 8px var(--accent-bright);
   }
   .leaderboard-title {
     font-family: 'Geist', sans-serif;
-    font-size: clamp(30px, 5.2vw, 54px);
+    font-size: clamp(32px, 5.4vw, 56px);
     font-weight: 600;
     line-height: 1.05;
     letter-spacing: -0.03em;
-    color: #000;
+    color: #ffffff;
     margin-bottom: 14px;
   }
   .leaderboard-title .accent {
     display: inline-block;
-    padding: 0 14px;
-    background: linear-gradient(135deg, rgba(26,153,96,0.22), rgba(52,211,153,0.22));
+    padding: 2px 14px;
+    background: linear-gradient(135deg, rgba(26,153,96,0.32), rgba(52,211,153,0.28));
     border-radius: 14px;
-    color: var(--accent);
+    color: var(--accent-bright);
   }
   .leaderboard-sub {
-    color: var(--gray);
+    color: rgba(255,255,255,0.55);
     font-size: 16px;
     line-height: 1.5;
-    max-width: 520px;
-    margin: 0 auto 44px;
+    max-width: 540px;
+    margin: 0 auto 48px;
   }
   .leaderboard {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 22px;
     padding: 8px;
-    box-shadow: 0 4px 24px -10px rgba(0,0,0,0.06);
     text-align: left;
+    position: relative;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
   .lb-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 20px 10px;
+    padding: 18px 22px 14px;
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--gray-dim);
+    color: rgba(255,255,255,0.38);
   }
   .lb-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    padding: 18px 20px;
     border-radius: 14px;
     border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
   }
   .lb-row + .lb-row { margin-top: 4px; }
   .lb-row-left {
@@ -1894,77 +1912,109 @@
     flex: 1;
   }
   .lb-rank {
-    font-family: 'Geist', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
-    color: var(--gray-dim);
+    color: rgba(255,255,255,0.25);
     font-variant-numeric: tabular-nums;
-    width: 24px;
+    letter-spacing: 0.05em;
+    width: 22px;
     flex-shrink: 0;
   }
   .lb-medal {
-    width: 40px; height: 40px;
+    width: 36px; height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Geist', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     flex-shrink: 0;
-    background: rgba(0,0,0,0.05);
-    color: var(--gray);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.38);
   }
   .lb-name {
     font-family: 'Geist', sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 500;
-    color: #000;
+    color: rgba(255,255,255,0.48);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .lb-price {
     font-family: 'Geist', sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 500;
-    color: var(--gray);
+    color: rgba(255,255,255,0.42);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
     padding-left: 12px;
   }
+
+  /* Winner row — dominates */
   .lb-row.winner {
-    background: linear-gradient(180deg, rgba(26,153,96,0.06), rgba(26,153,96,0.02));
-    border-color: rgba(26,153,96,0.3);
-    box-shadow: 0 10px 28px -14px rgba(26,153,96,0.3);
+    padding: 32px 28px 32px 24px;
+    background: linear-gradient(180deg, rgba(26,153,96,0.1) 0%, rgba(26,153,96,0.03) 100%);
+    border: 1px solid rgba(26,153,96,0.4);
+    box-shadow: 0 0 0 1px rgba(26,153,96,0.06), 0 24px 70px -20px rgba(26,153,96,0.45);
+    margin: 8px 0;
   }
-  .lb-row.winner .lb-rank { color: var(--accent); font-weight: 600; }
-  .lb-row.winner .lb-name { font-weight: 600; font-size: 20px; letter-spacing: -0.01em; }
-  .lb-row.winner .lb-price {
-    color: var(--accent);
-    font-size: 22px;
+  .lb-row.winner::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 72px;
+    transform: translate(-50%, -50%);
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(52,211,153,0.5) 0%, rgba(26,153,96,0.2) 28%, transparent 65%);
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .lb-row.winner > * { position: relative; z-index: 1; }
+  .lb-row.winner .lb-rank {
+    color: var(--accent-bright);
     font-weight: 600;
-    letter-spacing: -0.01em;
   }
   .lb-row.winner .lb-medal {
+    width: 56px; height: 56px;
     background: linear-gradient(135deg, var(--accent), var(--accent-bright));
-    color: #fff;
-    box-shadow: 0 0 0 5px rgba(26,153,96,0.14), 0 6px 16px -4px rgba(26,153,96,0.4);
+    border: 1px solid rgba(94,232,183,0.55);
+    color: #ffffff;
+    font-size: 19px;
+    box-shadow: 0 0 36px rgba(26,153,96,0.7), 0 0 0 8px rgba(26,153,96,0.1);
+  }
+  .lb-row.winner .lb-name {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 24px;
+    letter-spacing: -0.018em;
+  }
+  .lb-row.winner .lb-price {
+    color: var(--accent-bright);
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 20px rgba(52,211,153,0.5);
   }
 
   @media (max-width: 640px) {
-    .leaderboard-section { padding: 64px 12px 56px; }
-    .leaderboard-title .accent { padding: 0 8px; }
-    .leaderboard { padding: 6px; border-radius: 16px; }
-    .lb-header { padding: 12px 14px 8px; font-size: 10px; }
-    .lb-row { padding: 14px; }
+    .leaderboard-section { padding: 72px 12px 64px; }
+    .leaderboard-title .accent { padding: 2px 10px; border-radius: 10px; }
+    .leaderboard { padding: 6px; border-radius: 18px; }
+    .lb-header { padding: 14px 14px 10px; font-size: 10px; letter-spacing: 0.12em; }
+    .lb-row { padding: 12px 14px; }
     .lb-row-left { gap: 12px; }
-    .lb-rank { font-size: 12px; width: 18px; }
-    .lb-medal { width: 32px; height: 32px; font-size: 13px; }
-    .lb-name { font-size: 15px; }
-    .lb-price { font-size: 15px; padding-left: 8px; }
-    .lb-row.winner .lb-name { font-size: 16px; }
-    .lb-row.winner .lb-price { font-size: 17px; }
+    .lb-rank { font-size: 11px; width: 18px; }
+    .lb-medal { width: 30px; height: 30px; font-size: 12px; }
+    .lb-name { font-size: 13px; }
+    .lb-price { font-size: 13px; padding-left: 8px; }
+    .lb-row.winner { padding: 22px 16px; margin: 6px 0; }
+    .lb-row.winner .lb-medal { width: 44px; height: 44px; font-size: 16px; }
+    .lb-row.winner .lb-name { font-size: 18px; }
+    .lb-row.winner .lb-price { font-size: 22px; }
+    .lb-row.winner::before { width: 180px; height: 180px; left: 54px; }
   }
 </style>
 </head>
