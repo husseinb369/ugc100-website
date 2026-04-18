@@ -333,6 +333,7 @@
     gap: 10px;
     width: max-content;
     animation: marqueeScroll 60s linear infinite;
+    will-change: transform;
   }
   .hero-marquee-row.reverse { animation-direction: reverse; }
   .hero-marquee-row.slow { animation-duration: 80s; }
@@ -943,14 +944,19 @@
   }
   .ugc-slider-wrap::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
   .ugc-slider-wrap::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+  @keyframes ugcMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
   .ugc-slider {
     display: flex;
     gap: 16px;
-    overflow: hidden;
     padding: 0 40px;
-    scrollbar-width: none;
+    width: max-content;
+    animation: ugcMarquee 60s linear infinite;
+    will-change: transform;
   }
-  .ugc-slider::-webkit-scrollbar { display: none; }
+  .ugc-slider-2 { animation-direction: reverse; }
   .ugc-slide {
     flex-shrink: 0;
     width: 220px;
@@ -964,8 +970,8 @@
     transition: transform 0.3s;
   }
   .ugc-slide:hover { transform: translateY(-4px); cursor: pointer; }
-  .ugc-slide:nth-child(odd) { transform: translateY(30px); }
-  .ugc-slide:nth-child(odd):hover { transform: translateY(26px); }
+  .ugc-slide.zig { transform: translateY(30px); }
+  .ugc-slide.zig:hover { transform: translateY(26px); }
   .ugc-slide.playing .ugc-slide-play { display: none; }
   .ugc-slide.playing .ugc-slide-sound { display: none; }
   .ugc-slide.playing::after {
@@ -1725,8 +1731,8 @@
     }
 
     /* Slider slides: reduce stagger offset for smaller screens */
-    .ugc-slide:nth-child(odd) { transform: translateY(18px); }
-    .ugc-slide:nth-child(odd):hover { transform: translateY(14px); }
+    .ugc-slide.zig { transform: translateY(18px); }
+    .ugc-slide.zig:hover { transform: translateY(14px); }
 
     /* Logo ticker */
     .logo-ticker { gap: 24px; padding: 24px 0; }
@@ -2074,17 +2080,17 @@
   <!-- UGC Video Slider -->
   <div class="ugc-slider-wrap" style="margin-top:60px">
     <div class="ugc-slider">
-      <div class="ugc-slide"><video data-src="ugc-video-2.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-2.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-4.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-6.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-6.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-1.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-7.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-7.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-10.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-9.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-9.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-11.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-3.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-3.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-5.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-8.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-8.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
     </div>
   </div>
 
@@ -2706,17 +2712,17 @@
   </div>
   <div class="ugc-slider-wrap" style="margin-top:32px">
     <div class="ugc-slider ugc-slider-2">
-      <div class="ugc-slide"><video data-src="ugc-video-2.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-2.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-4.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-6.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-6.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-1.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-7.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-7.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-10.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-9.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-9.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-11.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-3.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-3.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
       <div class="ugc-slide"><video data-src="ugc-video-5.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
-      <div class="ugc-slide"><video data-src="ugc-video-8.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
+      <div class="ugc-slide zig"><video data-src="ugc-video-8.mp4" autoplay loop muted playsinline></video><div class="ugc-slide-sound">&#9834;</div><div class="ugc-slide-bars"><span></span><span></span><span></span><span></span><span></span></div></div>
     </div>
   </div>
 
@@ -3003,29 +3009,7 @@
 </footer>
 
 <script>
-// Lazy load videos
-const vidObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const v = e.target;
-      if (v.dataset.src) { v.src = v.dataset.src; v.load(); v.play(); delete v.dataset.src; }
-      vidObs.unobserve(v);
-    }
-  });
-}, { rootMargin: '200px' });
-document.querySelectorAll('video[data-src]').forEach(v => vidObs.observe(v));
-
-// Auto-scroll sliders
-document.querySelectorAll('.ugc-slider').forEach((slider, i) => {
-  let dir = i % 2 === 0 ? 1 : -1;
-  if (dir === -1) slider.scrollLeft = slider.scrollWidth;
-  setInterval(() => {
-    slider.scrollLeft += dir * 1;
-    if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) dir = -1;
-    if (slider.scrollLeft <= 0) dir = 1;
-  }, 16);
-});
-
+// Critical handlers — defined immediately so inline onclick works before idle init.
 function toggleFaq(btn) {
   const item = btn.closest('.faq-item');
   const answer = item.querySelector('.faq-answer');
@@ -3049,63 +3033,85 @@ function switchPricing(type, btn) {
   btn.classList.add('active');
 }
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.value-card, .usp-block, .feature-card, .review-card, .faq-item, .pricing-card, .blog-card, .scale-section, .quote-section').forEach(el => {
-  el.classList.add('anim');
-  observer.observe(el);
-});
-
-document.querySelectorAll('.value-grid .value-card, .features-grid .feature-card, .pricing-grid .pricing-card').forEach((el, i) => {
-  el.style.transitionDelay = (i * 0.1) + 's';
-});
-
-document.querySelectorAll('.reviews-col').forEach(col => {
-  col.querySelectorAll('.review-card').forEach((el, i) => { el.style.transitionDelay = (i * 0.1) + 's'; });
-});
-
-// Sticky mobile CTA — show after scrolling past hero
-const stickyCta = document.getElementById('stickyCta');
-if (stickyCta) {
-  const heroEl = document.querySelector('.hero');
-  const stickyObs = new IntersectionObserver(([entry]) => {
-    stickyCta.classList.toggle('visible', !entry.isIntersecting);
-  }, { threshold: 0 });
-  if (heroEl) stickyObs.observe(heroEl);
-}
-
-// Animated stat counters
-function animateCounter(el, target, suffix) {
-  const duration = 1500;
-  const start = performance.now();
-  const step = (now) => {
-    const progress = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = Math.floor(target * eased).toLocaleString() + suffix;
-    if (progress < 1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
-}
-
-const counterObs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.target.dataset.counted) {
-      entry.target.dataset.counted = '1';
-      const text = entry.target.textContent.trim();
-      const match = text.match(/^([\d,]+)(.*)/);
-      if (match) {
-        const num = parseInt(match[1].replace(/,/g, ''));
-        const suffix = match[2];
-        animateCounter(entry.target, num, suffix);
-      }
-    }
+function initApp() {
+  // Duplicate slides so the CSS translateX(-50%) marquee loops seamlessly.
+  document.querySelectorAll('.ugc-slider').forEach(slider => {
+    slider.innerHTML += slider.innerHTML;
   });
-}, { threshold: 0.5 });
 
-document.querySelectorAll('.scale-stat .num').forEach(el => counterObs.observe(el));
+  // Lazy load videos (observe after duplication so clones get observed too).
+  const vidObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const v = e.target;
+        if (v.dataset.src) { v.src = v.dataset.src; v.load(); v.play(); delete v.dataset.src; }
+        vidObs.unobserve(v);
+      }
+    });
+  }, { rootMargin: '200px' });
+  document.querySelectorAll('video[data-src]').forEach(v => vidObs.observe(v));
 
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.value-card, .usp-block, .feature-card, .review-card, .faq-item, .pricing-card, .blog-card, .scale-section, .quote-section').forEach(el => {
+    el.classList.add('anim');
+    observer.observe(el);
+  });
+
+  document.querySelectorAll('.value-grid .value-card, .features-grid .feature-card, .pricing-grid .pricing-card').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.1) + 's';
+  });
+
+  document.querySelectorAll('.reviews-col').forEach(col => {
+    col.querySelectorAll('.review-card').forEach((el, i) => { el.style.transitionDelay = (i * 0.1) + 's'; });
+  });
+
+  const stickyCta = document.getElementById('stickyCta');
+  if (stickyCta) {
+    const heroEl = document.querySelector('.hero');
+    const stickyObs = new IntersectionObserver(([entry]) => {
+      stickyCta.classList.toggle('visible', !entry.isIntersecting);
+    }, { threshold: 0 });
+    if (heroEl) stickyObs.observe(heroEl);
+  }
+
+  function animateCounter(el, target, suffix) {
+    const duration = 1500;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(target * eased).toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.counted) {
+        entry.target.dataset.counted = '1';
+        const text = entry.target.textContent.trim();
+        const match = text.match(/^([\d,]+)(.*)/);
+        if (match) {
+          const num = parseInt(match[1].replace(/,/g, ''));
+          const suffix = match[2];
+          animateCounter(entry.target, num, suffix);
+        }
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.scale-stat .num').forEach(el => counterObs.observe(el));
+}
+
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(initApp, { timeout: 1000 });
+} else {
+  setTimeout(initApp, 200);
+}
 </script>
 </body>
 </html>
