@@ -1873,8 +1873,8 @@
     margin: 0 auto 48px;
   }
   .leaderboard {
-    background: #0a0a0a;
-    border: 1px solid rgba(255,255,255,0.07);
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
     border-radius: 22px;
     padding: 8px;
     text-align: left;
@@ -1889,7 +1889,7 @@
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
+    color: #6b7280;
   }
   .lb-row {
     display: flex;
@@ -1898,6 +1898,7 @@
     padding: 18px 20px;
     border-radius: 14px;
     border: 1px solid transparent;
+    background: #fafafa;
     position: relative;
     overflow: hidden;
   }
@@ -1912,7 +1913,7 @@
   .lb-rank {
     font-size: 12px;
     font-weight: 500;
-    color: rgba(255,255,255,0.42);
+    color: #9ca3af;
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.05em;
     width: 22px;
@@ -1928,15 +1929,15 @@
     font-size: 14px;
     font-weight: 600;
     flex-shrink: 0;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.14);
-    color: rgba(255,255,255,0.7);
+    background: #e5e7eb;
+    border: 1px solid #e5e7eb;
+    color: #111111;
   }
   .lb-name {
     font-family: 'Geist', sans-serif;
     font-size: 16px;
     font-weight: 500;
-    color: rgba(255,255,255,0.78);
+    color: #111111;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1945,7 +1946,7 @@
     font-family: 'Geist', sans-serif;
     font-size: 16px;
     font-weight: 500;
-    color: rgba(255,255,255,0.68);
+    color: #111111;
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
     padding-left: 12px;
@@ -1954,25 +1955,12 @@
   /* Winner row — dominates */
   .lb-row.winner {
     padding: 32px 28px 32px 24px;
-    background: linear-gradient(180deg, rgba(26,153,96,0.1) 0%, rgba(26,153,96,0.03) 100%);
-    border: 1px solid rgba(26,153,96,0.4);
-    box-shadow: 0 0 0 1px rgba(26,153,96,0.06), 0 24px 70px -20px rgba(26,153,96,0.45);
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
     margin: 8px 0;
   }
-  .lb-row.winner::before {
-    content: '';
-    position: absolute;
-    top: 50%; left: 72px;
-    transform: translate(-50%, -50%);
-    width: 260px; height: 260px;
-    background: radial-gradient(circle, rgba(52,211,153,0.5) 0%, rgba(26,153,96,0.2) 28%, transparent 65%);
-    filter: blur(10px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .lb-row.winner > * { position: relative; z-index: 1; }
   .lb-row.winner .lb-rank {
-    color: var(--accent-bright);
+    color: #9ca3af;
     font-weight: 600;
   }
   .lb-row.winner .lb-medal {
@@ -1981,20 +1969,18 @@
     border: 1px solid rgba(94,232,183,0.55);
     color: #ffffff;
     font-size: 19px;
-    box-shadow: 0 0 36px rgba(26,153,96,0.7), 0 0 0 8px rgba(26,153,96,0.1);
   }
   .lb-row.winner .lb-name {
-    color: #ffffff;
+    color: #111111;
     font-weight: 600;
     font-size: 24px;
     letter-spacing: -0.018em;
   }
   .lb-row.winner .lb-price {
-    color: var(--accent-bright);
+    color: var(--accent);
     font-size: 32px;
     font-weight: 600;
     letter-spacing: -0.02em;
-    text-shadow: 0 0 20px rgba(52,211,153,0.5);
   }
 
   @media (max-width: 640px) {
@@ -2012,7 +1998,6 @@
     .lb-row.winner .lb-medal { width: 44px; height: 44px; font-size: 16px; }
     .lb-row.winner .lb-name { font-size: 18px; }
     .lb-row.winner .lb-price { font-size: 22px; }
-    .lb-row.winner::before { width: 180px; height: 180px; left: 54px; }
   }
 </style>
 </head>
